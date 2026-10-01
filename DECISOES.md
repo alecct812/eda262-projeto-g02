@@ -40,9 +40,12 @@ prevista da Olist sempre vem com hora 00:00:00, então comparar horários marcar
 qualquer entrega feita no próprio dia prometido. **Aceitamos perder** a distinção de horas
 dentro do dia, que a origem não tem para a previsão.
 
-> **Medido:** 99.441 de 99.441 datas previstas com hora 00:00:00. Pela regra de dias, 6.534
-> atrasados entre 96.470 elegíveis (6,77%). Comparando horários seriam 7.826: 1.292 entregas
-> no dia prometido virariam falsos atrasos, inflando a taxa em 1,34 ponto percentual.
+> **Medido:** 99.441 de 99.441 datas previstas com hora 00:00:00 (`perfil_olist.json`,
+> `orders_hora_da_data_prevista`; o preparo contaria exceções em
+> `prevista_com_hora_diferente_de_zero`, e a chave não aparece no manifesto porque houve 0). Pela regra de dias, 6.534
+> atrasados entre 96.470 elegíveis, ou 6,77% (`manifesto.json`). Comparando horários seriam
+> 7.826 (`perfil_olist.json`, `atrasados_se_comparar_timestamp`): 1.292 entregas no dia prometido
+> virariam falsos atrasos, inflando a taxa em 1,34 ponto percentual.
 
 ## DECISÃO 04: Limpeza da camada bruta para a trusted e elegibilidade
 
@@ -67,10 +70,11 @@ A pergunta usa compras de 01/01/2017 até 31/08/2018 (20 meses completos). As bo
 quase vazias e distorceriam comparações. **Aceitamos perder** os poucos pedidos de 2016. O
 filtro fica na consulta, não na trusted, que mantém toda a base.
 
-> **Medido:** pedidos por mês de compra nas bordas: 2016-09 = 4, 2016-10 = 324, 2016-11 = 0,
-> 2016-12 = 1, 2018-09 = 16, 2018-10 = 4. No período: 96.203 dos 96.470 elegíveis; ficam de fora
-> 267 elegíveis de 2016 e nenhum de 2018-09 ou 2018-10. Todas as 27 UFs têm ao menos 40
-> pedidos elegíveis no período (`manifesto.json`, `pergunta_referencia`).
+> **Medido:** pedidos por mês de compra nas bordas (`perfil_olist.json`,
+> `orders_por_mes_compra`): 2016-09 = 4, 2016-10 = 324, 2016-11 = 0, 2016-12 = 1, 2018-09 = 16,
+> 2018-10 = 4. No período: 96.203 dos 96.470 elegíveis; ficam de fora 267 elegíveis de 2016 e
+> nenhum de 2018-09 ou 2018-10 (`perfil_olist.json`, `atraso_por_mes_compra`). Todas as 27 UFs
+> têm ao menos 40 pedidos elegíveis no período (`manifesto.json`, `pergunta_referencia`).
 
 ## DECISÃO 06: Formato CSV sem aspas (LazySimpleSerDe)
 
@@ -105,9 +109,14 @@ em bytes varridos, porque o valor cobrado já está perto do mínimo de 10 MB.
 O custo de cada consulta é medido pelo `DataScannedInBytes` da execução (`get-query-execution`)
 e calculado como `max(MB arredondado para cima, 10 MB) x US$ 5,00 / TB`, com 1 MB = 10^6 bytes e
 1 TB = 10^12 bytes (preço do Athena em us-east-1, consultado em 01/10/2026). É um custo
-calculado, não o valor da fatura. O workgroup impõe sua configuração e corta consultas acima de
-52.428.800 bytes (50 MiB). **Aceitamos perder** consultas que leiam mais de 50 MiB, que nesta
-tabela só aconteceriam com erro (por exemplo, uma junção cruzada).
+calculado, não o valor da fatura. O workgroup impõe sua configuração e cancela consultas que
+leiam mais de 52.428.800 bytes (50 MiB) do S3. O teto conta bytes **lidos**, não o tamanho de
+resultados intermediários: ele pega erros como uma tabela cujo `LOCATION` aponte por engano para
+um prefixo com muito mais dados, ou uma consulta que leia a tabela 5 vezes ou mais. Uma junção
+da tabela com ela mesma lê cerca de 22,3 MB (2 varreduras), passa pelo teto e é cobrada por
+esses bytes (cerca de US$ 0,00012); o risco dela é tempo de execução, não custo. **Aceitamos
+perder** consultas legítimas que precisem ler mais de 4,69 varreduras completas da tabela, que a
+pergunta desta parte não exige.
 
 > **Medido:** na execução registrada, pergunta com estado `SUCCEEDED`, 11.167.989 bytes
 > varridos, 1.240 ms de motor e custo calculado de US$ 0,0000600000 (12 MB cobrados; execução
@@ -146,3 +155,14 @@ bootstrap.
 > `s3://eda262-g02-tfstate/eda262-g02/av1/parte-1/terraform.tfstate` (28.946 bytes após o
 > apply). `plan` no workspace `default` termina com erro de precondição (código 1); no `av1`,
 > `plan -detailed-exitcode` devolve 0 após o apply.
+
+## Observação: tags obrigatórias
+
+As tags `turma=eda262`, `grupo=g02` e `projeto=engenharia-de-dados` são aplicadas por
+`default_tags` no provider (mais `workspace=av1` na raiz). Dois tipos de recurso não aceitam tags
+na API da AWS e ficam sem elas: a tabela do Glue (`aws_glue_catalog_table`) e a consulta salva do
+Athena (`aws_athena_named_query`). Os dois são removidos pelo destroy junto com o database e o
+workgroup.
+
+> **Medido:** o critério 6 do `verifica.sh` confere as três tags em 8 recursos: os 4 buckets, o
+> workgroup, o Glue database, a tabela de trava e o objeto trusted.

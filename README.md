@@ -56,7 +56,8 @@ não aceitam tags na API da AWS.
 
 ## Região, conta e backend
 
-- Região: `us-east-1`.
+- Região: `us-east-1`, fixa no código e nos scripts, que ignoram outro `AWS_REGION` exportado
+  no terminal.
 - Conta: a do avaliador, com credenciais do grupo; nenhum recurso precisa existir antes.
 - Backend: S3 `eda262-g02-tfstate` com trava DynamoDB `eda262-g02-tflock`, ambos criados pela
   stack `parte-1/bootstrap` (state local). A raiz `parte-1/` usa o workspace `av1`, com o state
@@ -116,7 +117,8 @@ todos passarem:
 1. Buckets, Glue database e workgroup existem.
 2. Módulo `lake`, backend S3 + DynamoDB, state no bucket, workspace nomeado e `plan` sem mudanças.
 3. Schema declarado no Terraform (10 colunas, LazySimpleSerDe) e nenhum Crawler.
-4. Grão: `count(*) = count(DISTINCT id_pedido) = 99441` no Athena.
+4. Grão: `count(*) = count(DISTINCT id_pedido) = 99441` no Athena, e o campo vazio lido como
+   nulo (`motivo_exclusao IS NULL` em 96.470 linhas).
 5. Pergunta respondida (27 UFs, totais iguais ao cálculo local) com bytes e custo medidos.
 6. Tags obrigatórias nos buckets, workgroup, Glue database, tabela de trava e objeto trusted.
 7. `DECISOES.md` com grão, chaves, partição, formato e custo.
@@ -140,11 +142,30 @@ workgroup também. Por isso o destroy não deixa recurso órfão nem exige limpe
 
 ## Execução registrada (evidências)
 
-`bash parte-1/scripts/ciclo_completo.sh` executa o ciclo inteiro do zero (pré-verificação,
-bootstrap, init, workspace, apply, consulta, verificação, destroy, destroy do backend e
-pós-destroy) e grava cada comando com sua saída, horários e código de saída em
-`evidencias/execucao-<carimbo>/`. O ID da conta é substituído por `<ACCOUNT_ID>`. O resumo da
-execução entregue está em [evidencias/README.md](evidencias/README.md).
+`bash parte-1/scripts/ciclo_completo.sh` executa o ciclo inteiro do zero e grava cada comando
+com sua saída, horários e código de saída em `evidencias/execucao-<carimbo>/`. As etapas são:
+
+1. pré-verificação;
+2. versões;
+3. bootstrap: init e apply;
+4. init da raiz;
+5. prova do bloqueio do workspace `default`;
+6. workspace `av1`;
+7. apply;
+8. tamanho do state remoto;
+9. consulta;
+10. verificação;
+11. destroy;
+12. destroy do backend;
+13. pós-destroy.
+
+O ID da conta é substituído por `<ACCOUNT_ID>`. Se uma etapa falhar depois que algo foi criado,
+o script destrói a raiz e o backend, confere com o `--pos-destroy` e só então sai com erro.
+Assim, mesmo uma execução com falha não deixa recurso órfão. O resumo da execução entregue está
+em [evidencias/README.md](evidencias/README.md).
+
+Os scripts bash têm testes que usam `aws` e `terraform` falsos, sem tocar a AWS:
+`bash parte-1/scripts/test_scripts.sh`.
 
 Os scripts usam timeout de conexão curto com novas tentativas na AWS CLI, porque a rede usada
 nos testes teve conexões lentas com o S3.
@@ -161,7 +182,7 @@ parte-1/
   dados/trusted/        pedidos_entrega.csv e manifesto.json (gerados pelo preparo)
   preparo/              prepara_trusted.py e testes
   consulta/             pergunta.sql e consulta.sh
-  scripts/              comum.sh e ciclo_completo.sh
+  scripts/              comum.sh, ciclo_completo.sh e test_scripts.sh
 verificacao/verifica.sh
 evidencias/             execução registrada
 exploracao/             análise exploratória inicial (ferramenta auxiliar)
