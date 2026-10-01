@@ -1,0 +1,14 @@
+# Dataset completo do Kaggle: a entrega usa apenas parte-1/dados/
+/dataset/
+# Guia da disciplina (material do docente)
+/doc/
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan*
+crash.log
+# Python
+__pycache__/
+*.pyc

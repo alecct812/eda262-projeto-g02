@@ -1,0 +1,1545 @@
+{
+  "arquivos": {
+    "customers": {
+      "arquivo": "olist_customers_dataset.csv",
+      "bytes": 9033957,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2",
+      "linhas_fisicas": 99442,
+      "registros": 99441,
+      "registros_multilinha": 0,
+      "colunas": [
+        "customer_id",
+        "customer_unique_id",
+        "customer_zip_code_prefix",
+        "customer_city",
+        "customer_state"
+      ],
+      "larguras_de_registro": {
+        "5": 99441
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "customer_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 99441,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "customer_unique_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 96096,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "customer_zip_code_prefix": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 14994,
+          "tipos_observados": {
+            "int": 99441
+          },
+          "min": 1003.0,
+          "max": 99990.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "customer_city": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 4119,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 3,
+          "comprimento_max": 32
+        },
+        "customer_state": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 27,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 2,
+          "comprimento_max": 2,
+          "frequencias": {
+            "SP": 41746,
+            "RJ": 12852,
+            "MG": 11635,
+            "RS": 5466,
+            "PR": 5045,
+            "SC": 3637,
+            "BA": 3380,
+            "DF": 2140,
+            "ES": 2033,
+            "GO": 2020,
+            "PE": 1652,
+            "CE": 1336,
+            "PA": 975,
+            "MT": 907,
+            "MA": 747,
+            "MS": 715,
+            "PB": 536,
+            "PI": 495,
+            "RN": 485,
+            "AL": 413,
+            "SE": 350,
+            "TO": 280,
+            "RO": 253,
+            "AM": 148,
+            "AC": 81,
+            "AP": 68,
+            "RR": 46
+          }
+        }
+      }
+    },
+    "geolocation": {
+      "arquivo": "olist_geolocation_dataset.csv",
+      "bytes": 61273883,
+      "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6",
+      "linhas_fisicas": 1000164,
+      "registros": 1000163,
+      "registros_multilinha": 0,
+      "colunas": [
+        "geolocation_zip_code_prefix",
+        "geolocation_lat",
+        "geolocation_lng",
+        "geolocation_city",
+        "geolocation_state"
+      ],
+      "larguras_de_registro": {
+        "5": 1000163
+      },
+      "duplicatas_exatas": 261831,
+      "perfil": {
+        "geolocation_zip_code_prefix": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 19015,
+          "tipos_observados": {
+            "int": 1000163
+          },
+          "min": 1001.0,
+          "max": 99990.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "geolocation_lat": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 717372,
+          "tipos_observados": {
+            "float": 1000163
+          },
+          "min": -36.6053744107061,
+          "max": 45.06593318269697,
+          "negativos": 998827,
+          "zeros": 0
+        },
+        "geolocation_lng": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 717615,
+          "tipos_observados": {
+            "float": 1000163
+          },
+          "min": -101.46676644931476,
+          "max": 121.10539381057764,
+          "negativos": 1000160,
+          "zeros": 0
+        },
+        "geolocation_city": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 8011,
+          "tipos_observados": {
+            "string": 1000163
+          },
+          "comprimento_min": 2,
+          "comprimento_max": 38
+        },
+        "geolocation_state": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 27,
+          "tipos_observados": {
+            "string": 1000163
+          },
+          "comprimento_min": 2,
+          "comprimento_max": 2,
+          "frequencias": {
+            "SP": 404268,
+            "MG": 126336,
+            "RJ": 121169,
+            "RS": 61851,
+            "PR": 57859,
+            "SC": 38328,
+            "BA": 36045,
+            "GO": 20139,
+            "ES": 16748,
+            "PE": 16432,
+            "DF": 12986,
+            "MT": 12031,
+            "CE": 11674,
+            "PA": 10853,
+            "MS": 10431,
+            "MA": 7853,
+            "PB": 5538,
+            "RN": 5041,
+            "PI": 4549,
+            "AL": 4183,
+            "TO": 3576,
+            "SE": 3563,
+            "RO": 3478,
+            "AM": 2432,
+            "AC": 1301,
+            "AP": 853,
+            "RR": 646
+          }
+        }
+      }
+    },
+    "order_items": {
+      "arquivo": "olist_order_items_dataset.csv",
+      "bytes": 15438671,
+      "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279",
+      "linhas_fisicas": 112651,
+      "registros": 112650,
+      "registros_multilinha": 0,
+      "colunas": [
+        "order_id",
+        "order_item_id",
+        "product_id",
+        "seller_id",
+        "shipping_limit_date",
+        "price",
+        "freight_value"
+      ],
+      "larguras_de_registro": {
+        "7": 112650
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "order_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 98666,
+          "tipos_observados": {
+            "string": 112650
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "order_item_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 21,
+          "tipos_observados": {
+            "int": 112650
+          },
+          "min": 1.0,
+          "max": 21.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 32951,
+          "tipos_observados": {
+            "string": 112650
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "seller_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 3095,
+          "tipos_observados": {
+            "string": 112650
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "shipping_limit_date": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 93318,
+          "tipos_observados": {
+            "timestamp": 112650
+          },
+          "min": "2016-09-19 00:15:34",
+          "max": "2020-04-09 22:35:08"
+        },
+        "price": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 5968,
+          "tipos_observados": {
+            "float": 112650
+          },
+          "min": 0.85,
+          "max": 6735.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "freight_value": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 6999,
+          "tipos_observados": {
+            "float": 112650
+          },
+          "min": 0.0,
+          "max": 409.68,
+          "negativos": 0,
+          "zeros": 383
+        }
+      }
+    },
+    "order_payments": {
+      "arquivo": "olist_order_payments_dataset.csv",
+      "bytes": 5777138,
+      "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0",
+      "linhas_fisicas": 103887,
+      "registros": 103886,
+      "registros_multilinha": 0,
+      "colunas": [
+        "order_id",
+        "payment_sequential",
+        "payment_type",
+        "payment_installments",
+        "payment_value"
+      ],
+      "larguras_de_registro": {
+        "5": 103886
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "order_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 99440,
+          "tipos_observados": {
+            "string": 103886
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "payment_sequential": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 29,
+          "tipos_observados": {
+            "int": 103886
+          },
+          "min": 1.0,
+          "max": 29.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "payment_type": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 5,
+          "tipos_observados": {
+            "string": 103886
+          },
+          "comprimento_min": 6,
+          "comprimento_max": 11,
+          "frequencias": {
+            "credit_card": 76795,
+            "boleto": 19784,
+            "voucher": 5775,
+            "debit_card": 1529,
+            "not_defined": 3
+          }
+        },
+        "payment_installments": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 24,
+          "tipos_observados": {
+            "int": 103886
+          },
+          "min": 0.0,
+          "max": 24.0,
+          "negativos": 0,
+          "zeros": 2
+        },
+        "payment_value": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 29077,
+          "tipos_observados": {
+            "float": 103886
+          },
+          "min": 0.0,
+          "max": 13664.08,
+          "negativos": 0,
+          "zeros": 9
+        }
+      }
+    },
+    "order_reviews": {
+      "arquivo": "olist_order_reviews_dataset.csv",
+      "bytes": 14451670,
+      "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7",
+      "linhas_fisicas": 104720,
+      "registros": 99224,
+      "registros_multilinha": 5495,
+      "colunas": [
+        "review_id",
+        "order_id",
+        "review_score",
+        "review_comment_title",
+        "review_comment_message",
+        "review_creation_date",
+        "review_answer_timestamp"
+      ],
+      "larguras_de_registro": {
+        "7": 99224
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "review_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 98410,
+          "tipos_observados": {
+            "string": 99224
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "order_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 98673,
+          "tipos_observados": {
+            "string": 99224
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "review_score": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 5,
+          "tipos_observados": {
+            "int": 99224
+          },
+          "min": 1.0,
+          "max": 5.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "review_comment_title": {
+          "vazios": 87656,
+          "pct_vazios": 88.342,
+          "distintos": 4527,
+          "tipos_observados": {
+            "string": 11261,
+            "int": 307
+          },
+          "comprimento_min": 1,
+          "comprimento_max": 26
+        },
+        "review_comment_message": {
+          "vazios": 58247,
+          "pct_vazios": 58.703,
+          "distintos": 36159,
+          "tipos_observados": {
+            "string": 40949,
+            "int": 28
+          },
+          "comprimento_min": 1,
+          "comprimento_max": 208
+        },
+        "review_creation_date": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 636,
+          "tipos_observados": {
+            "timestamp": 99224
+          },
+          "min": "2016-10-02 00:00:00",
+          "max": "2018-08-31 00:00:00"
+        },
+        "review_answer_timestamp": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 98248,
+          "tipos_observados": {
+            "timestamp": 99224
+          },
+          "min": "2016-10-07 18:32:28",
+          "max": "2018-10-29 12:27:35"
+        }
+      }
+    },
+    "orders": {
+      "arquivo": "olist_orders_dataset.csv",
+      "bytes": 17654914,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf",
+      "linhas_fisicas": 99442,
+      "registros": 99441,
+      "registros_multilinha": 0,
+      "colunas": [
+        "order_id",
+        "customer_id",
+        "order_status",
+        "order_purchase_timestamp",
+        "order_approved_at",
+        "order_delivered_carrier_date",
+        "order_delivered_customer_date",
+        "order_estimated_delivery_date"
+      ],
+      "larguras_de_registro": {
+        "8": 99441
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "order_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 99441,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "customer_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 99441,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "order_status": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 8,
+          "tipos_observados": {
+            "string": 99441
+          },
+          "comprimento_min": 7,
+          "comprimento_max": 11,
+          "frequencias": {
+            "delivered": 96478,
+            "shipped": 1107,
+            "canceled": 625,
+            "unavailable": 609,
+            "invoiced": 314,
+            "processing": 301,
+            "created": 5,
+            "approved": 2
+          }
+        },
+        "order_purchase_timestamp": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 98875,
+          "tipos_observados": {
+            "timestamp": 99441
+          },
+          "min": "2016-09-04 21:15:19",
+          "max": "2018-10-17 17:30:18"
+        },
+        "order_approved_at": {
+          "vazios": 160,
+          "pct_vazios": 0.161,
+          "distintos": 90733,
+          "tipos_observados": {
+            "timestamp": 99281
+          },
+          "min": "2016-09-15 12:16:38",
+          "max": "2018-09-03 17:40:06"
+        },
+        "order_delivered_carrier_date": {
+          "vazios": 1783,
+          "pct_vazios": 1.793,
+          "distintos": 81018,
+          "tipos_observados": {
+            "timestamp": 97658
+          },
+          "min": "2016-10-08 10:34:01",
+          "max": "2018-09-11 19:48:28"
+        },
+        "order_delivered_customer_date": {
+          "vazios": 2965,
+          "pct_vazios": 2.982,
+          "distintos": 95664,
+          "tipos_observados": {
+            "timestamp": 96476
+          },
+          "min": "2016-10-11 13:46:32",
+          "max": "2018-10-17 13:22:46"
+        },
+        "order_estimated_delivery_date": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 459,
+          "tipos_observados": {
+            "timestamp": 99441
+          },
+          "min": "2016-09-30 00:00:00",
+          "max": "2018-11-12 00:00:00"
+        }
+      }
+    },
+    "products": {
+      "arquivo": "olist_products_dataset.csv",
+      "bytes": 2379446,
+      "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc",
+      "linhas_fisicas": 32952,
+      "registros": 32951,
+      "registros_multilinha": 0,
+      "colunas": [
+        "product_id",
+        "product_category_name",
+        "product_name_lenght",
+        "product_description_lenght",
+        "product_photos_qty",
+        "product_weight_g",
+        "product_length_cm",
+        "product_height_cm",
+        "product_width_cm"
+      ],
+      "larguras_de_registro": {
+        "9": 32951
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "product_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 32951,
+          "tipos_observados": {
+            "string": 32951
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "product_category_name": {
+          "vazios": 610,
+          "pct_vazios": 1.851,
+          "distintos": 73,
+          "tipos_observados": {
+            "string": 32341
+          },
+          "comprimento_min": 3,
+          "comprimento_max": 46
+        },
+        "product_name_lenght": {
+          "vazios": 610,
+          "pct_vazios": 1.851,
+          "distintos": 66,
+          "tipos_observados": {
+            "int": 32341
+          },
+          "min": 5.0,
+          "max": 76.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_description_lenght": {
+          "vazios": 610,
+          "pct_vazios": 1.851,
+          "distintos": 2960,
+          "tipos_observados": {
+            "int": 32341
+          },
+          "min": 4.0,
+          "max": 3992.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_photos_qty": {
+          "vazios": 610,
+          "pct_vazios": 1.851,
+          "distintos": 19,
+          "tipos_observados": {
+            "int": 32341
+          },
+          "min": 1.0,
+          "max": 20.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_weight_g": {
+          "vazios": 2,
+          "pct_vazios": 0.006,
+          "distintos": 2204,
+          "tipos_observados": {
+            "int": 32949
+          },
+          "min": 0.0,
+          "max": 40425.0,
+          "negativos": 0,
+          "zeros": 4
+        },
+        "product_length_cm": {
+          "vazios": 2,
+          "pct_vazios": 0.006,
+          "distintos": 99,
+          "tipos_observados": {
+            "int": 32949
+          },
+          "min": 7.0,
+          "max": 105.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_height_cm": {
+          "vazios": 2,
+          "pct_vazios": 0.006,
+          "distintos": 102,
+          "tipos_observados": {
+            "int": 32949
+          },
+          "min": 2.0,
+          "max": 105.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "product_width_cm": {
+          "vazios": 2,
+          "pct_vazios": 0.006,
+          "distintos": 95,
+          "tipos_observados": {
+            "int": 32949
+          },
+          "min": 6.0,
+          "max": 118.0,
+          "negativos": 0,
+          "zeros": 0
+        }
+      }
+    },
+    "sellers": {
+      "arquivo": "olist_sellers_dataset.csv",
+      "bytes": 174703,
+      "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e",
+      "linhas_fisicas": 3096,
+      "registros": 3095,
+      "registros_multilinha": 0,
+      "colunas": [
+        "seller_id",
+        "seller_zip_code_prefix",
+        "seller_city",
+        "seller_state"
+      ],
+      "larguras_de_registro": {
+        "4": 3095
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "seller_id": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 3095,
+          "tipos_observados": {
+            "string": 3095
+          },
+          "comprimento_min": 32,
+          "comprimento_max": 32
+        },
+        "seller_zip_code_prefix": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 2246,
+          "tipos_observados": {
+            "int": 3095
+          },
+          "min": 1001.0,
+          "max": 99730.0,
+          "negativos": 0,
+          "zeros": 0
+        },
+        "seller_city": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 611,
+          "tipos_observados": {
+            "string": 3094,
+            "int": 1
+          },
+          "comprimento_min": 2,
+          "comprimento_max": 40
+        },
+        "seller_state": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 23,
+          "tipos_observados": {
+            "string": 3095
+          },
+          "comprimento_min": 2,
+          "comprimento_max": 2,
+          "frequencias": {
+            "SP": 1849,
+            "PR": 349,
+            "MG": 244,
+            "SC": 190,
+            "RJ": 171,
+            "RS": 129,
+            "GO": 40,
+            "DF": 30,
+            "ES": 23,
+            "BA": 19,
+            "CE": 13,
+            "PE": 9,
+            "PB": 6,
+            "RN": 5,
+            "MS": 5,
+            "MT": 4,
+            "RO": 2,
+            "SE": 2,
+            "AC": 1,
+            "PI": 1,
+            "MA": 1,
+            "AM": 1,
+            "PA": 1
+          }
+        }
+      }
+    },
+    "category_translation": {
+      "arquivo": "product_category_name_translation.csv",
+      "bytes": 2613,
+      "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278",
+      "linhas_fisicas": 72,
+      "registros": 71,
+      "registros_multilinha": 0,
+      "colunas": [
+        "product_category_name",
+        "product_category_name_english"
+      ],
+      "larguras_de_registro": {
+        "2": 71
+      },
+      "duplicatas_exatas": 0,
+      "perfil": {
+        "product_category_name": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 71,
+          "tipos_observados": {
+            "string": 71
+          },
+          "comprimento_min": 3,
+          "comprimento_max": 46
+        },
+        "product_category_name_english": {
+          "vazios": 0,
+          "pct_vazios": 0.0,
+          "distintos": 71,
+          "tipos_observados": {
+            "string": 71
+          },
+          "comprimento_min": 3,
+          "comprimento_max": 39
+        }
+      }
+    }
+  },
+  "chaves": {
+    "orders.order_id": {
+      "linhas": 99441,
+      "chaves_distintas": 99441,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "customers.customer_id": {
+      "linhas": 99441,
+      "chaves_distintas": 99441,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "customers.customer_unique_id": {
+      "linhas": 99441,
+      "chaves_distintas": 96096,
+      "chaves_repetidas": 2997,
+      "linhas_em_chaves_repetidas": 6342
+    },
+    "order_items.(order_id,order_item_id)": {
+      "linhas": 112650,
+      "chaves_distintas": 112650,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "order_payments.(order_id,payment_sequential)": {
+      "linhas": 103886,
+      "chaves_distintas": 103886,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "order_reviews.review_id": {
+      "linhas": 99224,
+      "chaves_distintas": 98410,
+      "chaves_repetidas": 789,
+      "linhas_em_chaves_repetidas": 1603
+    },
+    "order_reviews.(review_id,order_id)": {
+      "linhas": 99224,
+      "chaves_distintas": 99224,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "order_reviews.order_id": {
+      "linhas": 99224,
+      "chaves_distintas": 98673,
+      "chaves_repetidas": 547,
+      "linhas_em_chaves_repetidas": 1098
+    },
+    "products.product_id": {
+      "linhas": 32951,
+      "chaves_distintas": 32951,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "sellers.seller_id": {
+      "linhas": 3095,
+      "chaves_distintas": 3095,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "category_translation.product_category_name": {
+      "linhas": 71,
+      "chaves_distintas": 71,
+      "chaves_repetidas": 0,
+      "linhas_em_chaves_repetidas": 0
+    },
+    "geolocation.zip_code_prefix": {
+      "linhas": 1000163,
+      "chaves_distintas": 19015,
+      "chaves_repetidas": 17972,
+      "linhas_em_chaves_repetidas": 999120
+    }
+  },
+  "integridade": {
+    "orders.customer_id -> customers": {
+      "linhas_filho_com_chave": 99441,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 99441,
+      "chaves_pai_sem_filho": 0
+    },
+    "order_items.order_id -> orders": {
+      "linhas_filho_com_chave": 112650,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 99441,
+      "chaves_pai_sem_filho": 775
+    },
+    "order_items.product_id -> products": {
+      "linhas_filho_com_chave": 112650,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 32951,
+      "chaves_pai_sem_filho": 0
+    },
+    "order_items.seller_id -> sellers": {
+      "linhas_filho_com_chave": 112650,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 3095,
+      "chaves_pai_sem_filho": 0
+    },
+    "order_payments.order_id -> orders": {
+      "linhas_filho_com_chave": 103886,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 99441,
+      "chaves_pai_sem_filho": 1
+    },
+    "order_reviews.order_id -> orders": {
+      "linhas_filho_com_chave": 99224,
+      "linhas_filho_orfas": 0,
+      "chaves_orfas_distintas": 0,
+      "chaves_pai": 99441,
+      "chaves_pai_sem_filho": 768
+    },
+    "products.category -> translation": {
+      "linhas_filho_com_chave": 32341,
+      "linhas_filho_orfas": 13,
+      "chaves_orfas_distintas": 2,
+      "chaves_pai": 71,
+      "chaves_pai_sem_filho": 0
+    },
+    "customers.zip -> geolocation": {
+      "linhas_filho_com_chave": 99441,
+      "linhas_filho_orfas": 278,
+      "chaves_orfas_distintas": 157,
+      "chaves_pai": 19015,
+      "chaves_pai_sem_filho": 4178
+    },
+    "sellers.zip -> geolocation": {
+      "linhas_filho_com_chave": 3095,
+      "linhas_filho_orfas": 7,
+      "chaves_orfas_distintas": 7,
+      "chaves_pai": 19015,
+      "chaves_pai_sem_filho": 16776
+    }
+  },
+  "orders_status": {
+    "delivered": 96478,
+    "shipped": 1107,
+    "canceled": 625,
+    "unavailable": 609,
+    "invoiced": 314,
+    "processing": 301,
+    "created": 5,
+    "approved": 2
+  },
+  "orders_nulos_por_status": {
+    "invoiced": {
+      "order_delivered_carrier_date": 314,
+      "order_delivered_customer_date": 314
+    },
+    "shipped": {
+      "order_delivered_customer_date": 1107
+    },
+    "processing": {
+      "order_delivered_carrier_date": 301,
+      "order_delivered_customer_date": 301
+    },
+    "unavailable": {
+      "order_delivered_carrier_date": 609,
+      "order_delivered_customer_date": 609
+    },
+    "canceled": {
+      "order_delivered_carrier_date": 550,
+      "order_delivered_customer_date": 619,
+      "order_approved_at": 141
+    },
+    "delivered": {
+      "order_delivered_customer_date": 8,
+      "order_approved_at": 14,
+      "order_delivered_carrier_date": 2
+    },
+    "created": {
+      "order_approved_at": 5,
+      "order_delivered_carrier_date": 5,
+      "order_delivered_customer_date": 5
+    },
+    "approved": {
+      "order_delivered_carrier_date": 2,
+      "order_delivered_customer_date": 2
+    }
+  },
+  "orders_sequencia_datas": {
+    "coleta_antes_da_aprovacao": 1359,
+    "coleta_antes_da_compra": 166,
+    "nao_delivered_com_data_entrega(canceled)": 6,
+    "delivered_sem_data_entrega": 8,
+    "entrega_antes_da_coleta": 23
+  },
+  "orders_hora_da_data_prevista": {
+    "00:00:00": 99441
+  },
+  "orders_por_mes_compra": {
+    "2016-09": 4,
+    "2016-10": 324,
+    "2016-12": 1,
+    "2017-01": 800,
+    "2017-02": 1780,
+    "2017-03": 2682,
+    "2017-04": 2404,
+    "2017-05": 3700,
+    "2017-06": 3245,
+    "2017-07": 4026,
+    "2017-08": 4331,
+    "2017-09": 4285,
+    "2017-10": 4631,
+    "2017-11": 7544,
+    "2017-12": 5673,
+    "2018-01": 7269,
+    "2018-02": 6728,
+    "2018-03": 7211,
+    "2018-04": 6939,
+    "2018-05": 6873,
+    "2018-06": 6167,
+    "2018-07": 6292,
+    "2018-08": 6512,
+    "2018-09": 16,
+    "2018-10": 4
+  },
+  "orders_delivered_por_mes_compra": {
+    "2016-09": 1,
+    "2016-10": 265,
+    "2016-12": 1,
+    "2017-01": 750,
+    "2017-02": 1653,
+    "2017-03": 2546,
+    "2017-04": 2303,
+    "2017-05": 3546,
+    "2017-06": 3135,
+    "2017-07": 3872,
+    "2017-08": 4193,
+    "2017-09": 4150,
+    "2017-10": 4478,
+    "2017-11": 7289,
+    "2017-12": 5513,
+    "2018-01": 7069,
+    "2018-02": 6555,
+    "2018-03": 7003,
+    "2018-04": 6798,
+    "2018-05": 6749,
+    "2018-06": 6099,
+    "2018-07": 6159,
+    "2018-08": 6351
+  },
+  "atraso_candidato": {
+    "elegiveis": 96470,
+    "atrasados_por_data": 6534,
+    "taxa_pct": 6.77,
+    "atrasados_se_comparar_timestamp": 7826,
+    "dias_atraso_mediana": 7,
+    "dias_atraso_p90": 22,
+    "dias_atraso_max": 188,
+    "por_uf": {
+      "SP": {
+        "elegiveis": 40494,
+        "atrasados": 1820,
+        "taxa_pct": 4.49
+      },
+      "RJ": {
+        "elegiveis": 12350,
+        "atrasados": 1495,
+        "taxa_pct": 12.11
+      },
+      "MG": {
+        "elegiveis": 11354,
+        "atrasados": 519,
+        "taxa_pct": 4.57
+      },
+      "RS": {
+        "elegiveis": 5344,
+        "atrasados": 325,
+        "taxa_pct": 6.08
+      },
+      "PR": {
+        "elegiveis": 4923,
+        "atrasados": 199,
+        "taxa_pct": 4.04
+      },
+      "SC": {
+        "elegiveis": 3546,
+        "atrasados": 291,
+        "taxa_pct": 8.21
+      },
+      "BA": {
+        "elegiveis": 3256,
+        "atrasados": 396,
+        "taxa_pct": 12.16
+      },
+      "DF": {
+        "elegiveis": 2080,
+        "atrasados": 118,
+        "taxa_pct": 5.67
+      },
+      "ES": {
+        "elegiveis": 1995,
+        "atrasados": 214,
+        "taxa_pct": 10.73
+      },
+      "GO": {
+        "elegiveis": 1957,
+        "atrasados": 128,
+        "taxa_pct": 6.54
+      },
+      "PE": {
+        "elegiveis": 1593,
+        "atrasados": 153,
+        "taxa_pct": 9.6
+      },
+      "CE": {
+        "elegiveis": 1279,
+        "atrasados": 176,
+        "taxa_pct": 13.76
+      },
+      "PA": {
+        "elegiveis": 946,
+        "atrasados": 106,
+        "taxa_pct": 11.21
+      },
+      "MT": {
+        "elegiveis": 886,
+        "atrasados": 53,
+        "taxa_pct": 5.98
+      },
+      "MA": {
+        "elegiveis": 717,
+        "atrasados": 125,
+        "taxa_pct": 17.43
+      },
+      "MS": {
+        "elegiveis": 701,
+        "atrasados": 68,
+        "taxa_pct": 9.7
+      },
+      "PB": {
+        "elegiveis": 517,
+        "atrasados": 54,
+        "taxa_pct": 10.44
+      },
+      "PI": {
+        "elegiveis": 476,
+        "atrasados": 66,
+        "taxa_pct": 13.87
+      },
+      "RN": {
+        "elegiveis": 474,
+        "atrasados": 44,
+        "taxa_pct": 9.28
+      },
+      "AL": {
+        "elegiveis": 397,
+        "atrasados": 85,
+        "taxa_pct": 21.41
+      },
+      "SE": {
+        "elegiveis": 335,
+        "atrasados": 51,
+        "taxa_pct": 15.22
+      },
+      "TO": {
+        "elegiveis": 274,
+        "atrasados": 27,
+        "taxa_pct": 9.85
+      },
+      "RO": {
+        "elegiveis": 243,
+        "atrasados": 7,
+        "taxa_pct": 2.88
+      },
+      "AM": {
+        "elegiveis": 145,
+        "atrasados": 4,
+        "taxa_pct": 2.76
+      },
+      "AC": {
+        "elegiveis": 80,
+        "atrasados": 3,
+        "taxa_pct": 3.75
+      },
+      "AP": {
+        "elegiveis": 67,
+        "atrasados": 2,
+        "taxa_pct": 2.99
+      },
+      "RR": {
+        "elegiveis": 41,
+        "atrasados": 5,
+        "taxa_pct": 12.2
+      }
+    }
+  },
+  "atraso_por_mes_compra": {
+    "2016-09": {
+      "elegiveis": 1,
+      "atrasados": 1,
+      "taxa_pct": 100.0,
+      "em_aberto": 1
+    },
+    "2016-10": {
+      "elegiveis": 265,
+      "atrasados": 2,
+      "taxa_pct": 0.75,
+      "em_aberto": 28
+    },
+    "2016-12": {
+      "elegiveis": 1,
+      "atrasados": 0,
+      "taxa_pct": 0.0,
+      "em_aberto": 0
+    },
+    "2017-01": {
+      "elegiveis": 750,
+      "atrasados": 22,
+      "taxa_pct": 2.93,
+      "em_aberto": 37
+    },
+    "2017-02": {
+      "elegiveis": 1653,
+      "atrasados": 49,
+      "taxa_pct": 2.96,
+      "em_aberto": 65
+    },
+    "2017-03": {
+      "elegiveis": 2546,
+      "atrasados": 116,
+      "taxa_pct": 4.56,
+      "em_aberto": 71
+    },
+    "2017-04": {
+      "elegiveis": 2303,
+      "atrasados": 151,
+      "taxa_pct": 6.56,
+      "em_aberto": 74
+    },
+    "2017-05": {
+      "elegiveis": 3545,
+      "atrasados": 106,
+      "taxa_pct": 2.99,
+      "em_aberto": 94
+    },
+    "2017-06": {
+      "elegiveis": 3135,
+      "atrasados": 95,
+      "taxa_pct": 3.03,
+      "em_aberto": 70
+    },
+    "2017-07": {
+      "elegiveis": 3872,
+      "atrasados": 108,
+      "taxa_pct": 2.79,
+      "em_aberto": 74
+    },
+    "2017-08": {
+      "elegiveis": 4193,
+      "atrasados": 122,
+      "taxa_pct": 2.91,
+      "em_aberto": 79
+    },
+    "2017-09": {
+      "elegiveis": 4150,
+      "atrasados": 182,
+      "taxa_pct": 4.39,
+      "em_aberto": 77
+    },
+    "2017-10": {
+      "elegiveis": 4478,
+      "atrasados": 187,
+      "taxa_pct": 4.18,
+      "em_aberto": 69
+    },
+    "2017-11": {
+      "elegiveis": 7288,
+      "atrasados": 904,
+      "taxa_pct": 12.4,
+      "em_aberto": 134
+    },
+    "2017-12": {
+      "elegiveis": 5513,
+      "atrasados": 411,
+      "taxa_pct": 7.46,
+      "em_aberto": 107
+    },
+    "2018-01": {
+      "elegiveis": 7069,
+      "atrasados": 403,
+      "taxa_pct": 5.7,
+      "em_aberto": 118
+    },
+    "2018-02": {
+      "elegiveis": 6555,
+      "atrasados": 926,
+      "taxa_pct": 14.13,
+      "em_aberto": 70
+    },
+    "2018-03": {
+      "elegiveis": 7003,
+      "atrasados": 1328,
+      "taxa_pct": 18.96,
+      "em_aberto": 165
+    },
+    "2018-04": {
+      "elegiveis": 6798,
+      "atrasados": 306,
+      "taxa_pct": 4.5,
+      "em_aberto": 121
+    },
+    "2018-05": {
+      "elegiveis": 6749,
+      "atrasados": 443,
+      "taxa_pct": 6.56,
+      "em_aberto": 84
+    },
+    "2018-06": {
+      "elegiveis": 6096,
+      "atrasados": 71,
+      "taxa_pct": 1.16,
+      "em_aberto": 46
+    },
+    "2018-07": {
+      "elegiveis": 6156,
+      "atrasados": 208,
+      "taxa_pct": 3.38,
+      "em_aberto": 74
+    },
+    "2018-08": {
+      "elegiveis": 6351,
+      "atrasados": 393,
+      "taxa_pct": 6.19,
+      "em_aberto": 70
+    }
+  },
+  "em_aberto_por_mes_compra": {
+    "2016-09": 1,
+    "2016-10": 28,
+    "2017-01": 37,
+    "2017-02": 65,
+    "2017-03": 71,
+    "2017-04": 74,
+    "2017-05": 94,
+    "2017-06": 70,
+    "2017-07": 74,
+    "2017-08": 79,
+    "2017-09": 77,
+    "2017-10": 69,
+    "2017-11": 134,
+    "2017-12": 107,
+    "2018-01": 118,
+    "2018-02": 70,
+    "2018-03": 165,
+    "2018-04": 121,
+    "2018-05": 84,
+    "2018-06": 46,
+    "2018-07": 74,
+    "2018-08": 70,
+    "2018-09": 1
+  },
+  "celulas_uf_mes": {
+    "celulas": 556,
+    "min": 1,
+    "mediana": 37,
+    "max": 3164,
+    "abaixo_de_30": 247,
+    "abaixo_de_100": 384
+  },
+  "customers_por_uf": {
+    "SP": 41746,
+    "RJ": 12852,
+    "MG": 11635,
+    "RS": 5466,
+    "PR": 5045,
+    "SC": 3637,
+    "BA": 3380,
+    "DF": 2140,
+    "ES": 2033,
+    "GO": 2020,
+    "PE": 1652,
+    "CE": 1336,
+    "PA": 975,
+    "MT": 907,
+    "MA": 747,
+    "MS": 715,
+    "PB": 536,
+    "PI": 495,
+    "RN": 485,
+    "AL": 413,
+    "SE": 350,
+    "TO": 280,
+    "RO": 253,
+    "AM": 148,
+    "AC": 81,
+    "AP": 68,
+    "RR": 46
+  },
+  "customers_pedidos_por_pessoa": {
+    "1": 93099,
+    "2": 2745,
+    "3": 203,
+    "4": 30,
+    "5": 8,
+    "6": 6,
+    "7": 3,
+    "9": 1,
+    "17": 1
+  },
+  "customers_zip_comprimentos": {
+    "5": 99441
+  },
+  "customers_cidades_com_nao_ascii": 0,
+  "geolocation_cidades_com_nao_ascii": 73442,
+  "geolocation_fora_do_brasil_aprox": {
+    "lat": 31,
+    "lng": 37
+  },
+  "itens_por_pedido": {
+    "1": 88863,
+    "2": 7516,
+    "3": 1322,
+    "4": 505,
+    "5": 204,
+    "6": 198,
+    "7": 22,
+    "8": 8,
+    "9": 3,
+    "10": 8,
+    "11": 4,
+    "12": 5,
+    "13": 1,
+    "14": 2,
+    "15": 2,
+    "20": 2,
+    "21": 1
+  },
+  "pedidos_multivendedor": 1278,
+  "pagamentos_por_pedido": {
+    "1": 96479,
+    "2": 2382,
+    "3": 301,
+    "4": 108,
+    "5": 52,
+    "6": 36,
+    "7": 28,
+    "8": 11,
+    "9": 9,
+    "10": 5,
+    "11": 8,
+    "12": 8,
+    "13": 3,
+    "14": 2,
+    "15": 2,
+    "19": 2,
+    "21": 1,
+    "22": 1,
+    "26": 1,
+    "29": 1
+  },
+  "itens_vs_pagamentos": {
+    "pedidos_comparados": 98665,
+    "diferenca_maior_que_1_real": 249,
+    "pedidos_com_itens_sem_pagamento": 1,
+    "pedidos_com_pagamento_sem_itens": 775
+  },
+  "pedidos_sem_itens_por_status": {
+    "unavailable": 603,
+    "canceled": 164,
+    "created": 5,
+    "shipped": 1,
+    "invoiced": 2
+  },
+  "aspas_inconsistentes": {
+    "orders": {
+      "primeiro_campo_com_aspas": 61842,
+      "primeiro_campo_sem_aspas": 37599
+    },
+    "customers": {
+      "primeiro_campo_com_aspas": 62165,
+      "primeiro_campo_sem_aspas": 37276
+    },
+    "order_items": {
+      "primeiro_campo_com_aspas": 70123,
+      "primeiro_campo_sem_aspas": 42527
+    }
+  }
+}
