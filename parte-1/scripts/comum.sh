@@ -7,6 +7,13 @@ PARTE1="$RAIZ/parte-1"
 export AWS_REGION="${AWS_REGION:-us-east-1}"
 export AWS_PAGER=""
 
+# Rede instavel ate o S3 (conexoes TCP de 6 s a mais de 12 s medidas em 2026-10-01): o timeout
+# padrao de conexao da CLI e 60 s por tentativa, o que prendia uma chamada por minutos.
+# Conexao curta com novas tentativas mantem cada chamada limitada e resiliente.
+export AWS_RETRY_MODE="${AWS_RETRY_MODE:-standard}"
+export AWS_MAX_ATTEMPTS="${AWS_MAX_ATTEMPTS:-8}"
+aws() { command aws --cli-connect-timeout 5 --cli-read-timeout 60 "$@"; }
+
 PRECO_USD_POR_TB="5.00"   # Athena, us-east-1, aws.amazon.com/athena/pricing (conferido em 2026-10-01)
 MINIMO_BYTES=10000000     # minimo cobrado por consulta: 10 MB (convencao decimal, ver DECISOES.md)
 
