@@ -1,0 +1,155 @@
+{
+  "entradas": {
+    "olist_orders_dataset.csv": {
+      "linhas": 99441,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+    },
+    "olist_customers_dataset.csv": {
+      "linhas": 99441,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+    }
+  },
+  "order_id_no_bruto": {
+    "com_aspas": 61842,
+    "sem_aspas": 37599
+  },
+  "contagens": {
+    "anomalia_coleta_antes_da_aprovacao": 1359,
+    "anomalia_coleta_antes_da_compra": 166,
+    "anomalia_entrega_antes_da_coleta": 23,
+    "anomalia_entregue_sem_aprovacao": 14,
+    "anomalia_entregue_sem_coleta": 2,
+    "anomalia_nao_entregue_com_data_de_entrega": 6,
+    "atrasados": 6534,
+    "elegiveis": 96470,
+    "excluido_entregue_sem_data": 8,
+    "excluido_status_nao_entregue": 2963,
+    "linhas": 99441
+  },
+  "saida": {
+    "arquivo": "pedidos_entrega.csv",
+    "linhas": 99441,
+    "bytes": 11167989,
+    "sha256": "de2bb699c6668e65622028d27b09ae5bc32fc14e92a42bbe0db5e9f6c751b91b",
+    "bytes_equivalente_jsonl": 28693223
+  },
+  "pergunta_referencia": {
+    "periodo": [
+      "2017-01-01 00:00:00",
+      "2018-09-01 00:00:00"
+    ],
+    "ufs": 27,
+    "elegiveis": 96203,
+    "atrasados": 6531,
+    "por_uf": {
+      "AC": {
+        "elegiveis": 80,
+        "atrasados": 3
+      },
+      "AL": {
+        "elegiveis": 396,
+        "atrasados": 85
+      },
+      "AM": {
+        "elegiveis": 145,
+        "atrasados": 4
+      },
+      "AP": {
+        "elegiveis": 67,
+        "atrasados": 2
+      },
+      "BA": {
+        "elegiveis": 3253,
+        "atrasados": 396
+      },
+      "CE": {
+        "elegiveis": 1273,
+        "atrasados": 176
+      },
+      "DF": {
+        "elegiveis": 2074,
+        "atrasados": 118
+      },
+      "ES": {
+        "elegiveis": 1992,
+        "atrasados": 214
+      },
+      "GO": {
+        "elegiveis": 1950,
+        "atrasados": 128
+      },
+      "MA": {
+        "elegiveis": 713,
+        "atrasados": 125
+      },
+      "MG": {
+        "elegiveis": 11319,
+        "atrasados": 519
+      },
+      "MS": {
+        "elegiveis": 701,
+        "atrasados": 68
+      },
+      "MT": {
+        "elegiveis": 885,
+        "atrasados": 53
+      },
+      "PA": {
+        "elegiveis": 942,
+        "atrasados": 106
+      },
+      "PB": {
+        "elegiveis": 516,
+        "atrasados": 54
+      },
+      "PE": {
+        "elegiveis": 1587,
+        "atrasados": 153
+      },
+      "PI": {
+        "elegiveis": 475,
+        "atrasados": 66
+      },
+      "PR": {
+        "elegiveis": 4903,
+        "atrasados": 199
+      },
+      "RJ": {
+        "elegiveis": 12310,
+        "atrasados": 1495
+      },
+      "RN": {
+        "elegiveis": 470,
+        "atrasados": 44
+      },
+      "RO": {
+        "elegiveis": 243,
+        "atrasados": 7
+      },
+      "RR": {
+        "elegiveis": 40,
+        "atrasados": 5
+      },
+      "RS": {
+        "elegiveis": 5327,
+        "atrasados": 325
+      },
+      "SC": {
+        "elegiveis": 3537,
+        "atrasados": 291
+      },
+      "SE": {
+        "elegiveis": 332,
+        "atrasados": 51
+      },
+      "SP": {
+        "elegiveis": 40399,
+        "atrasados": 1817
+      },
+      "TO": {
+        "elegiveis": 274,
+        "atrasados": 27
+      }
+    }
+  }
+}
