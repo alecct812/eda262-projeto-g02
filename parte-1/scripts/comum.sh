@@ -4,7 +4,9 @@
 
 RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 PARTE1="$RAIZ/parte-1"
-export AWS_REGION="${AWS_REGION:-us-east-1}"
+# A infraestrutura fica em us-east-1 (backend.tf e var.regiao). Os scripts usam a mesma regiao
+# mesmo que o terminal tenha outro AWS_REGION exportado, para nao conferir a regiao errada.
+export AWS_REGION="us-east-1" AWS_DEFAULT_REGION="us-east-1"
 export AWS_PAGER=""
 
 # Rede instavel ate o S3 (conexoes TCP de 6 s a mais de 12 s medidas em 2026-10-01): o timeout

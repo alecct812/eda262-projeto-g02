@@ -10,6 +10,7 @@ GRUPO="${GRUPO:-g02}"
 PREFIXO="eda262-$GRUPO"
 # Valores medidos pelo preparo (parte-1/dados/trusted/manifesto.json)
 ESPERADO_LINHAS=99441
+ESPERADO_ELEGIVEIS_BASE=96470
 ESPERADO_UFS=27
 ESPERADO_ELEGIVEIS=96203
 ESPERADO_ATRASADOS=6531
@@ -29,6 +30,7 @@ resumo() { fim_criterio; echo; echo "== RESUMO: $APROVADOS de $TOTAL criterios P
 
 exige_credenciais || exit 1
 CONTA=$(conta_aws)
+echo "Regiao: $AWS_REGION | grupo: $GRUPO"
 
 if [ "${1:-}" = "--pos-destroy" ]; then
   criterio "Destroy limpo: nenhum recurso $PREFIXO restante (Guia 4.1 e 06)"
@@ -86,12 +88,14 @@ SERDE=$(aws glue get-table --database-name "$BANCO" --name "$TABELA" \
 checa "SerDe declarado: LazySimpleSerDe" test "$SERDE" = "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe"
 
 criterio "Tabela trusted modelada com grao declarado (uma linha por pedido)"
-QID=$(athena_executa "SELECT count(*), count(DISTINCT id_pedido) FROM $TABELA" "$BANCO" "$WG")
+QID=$(athena_executa "SELECT count(*), count(DISTINCT id_pedido), count_if(motivo_exclusao IS NULL) FROM $TABELA" "$BANCO" "$WG")
 EST=$(athena_espera "$QID")
 checa "consulta de grao SUCCEEDED" test "$EST" = "SUCCEEDED"
 GRAO=$(athena_resultado_csv "$QID" | tail -n 1 | tr -d '"')
-checa "count(*) = count(DISTINCT id_pedido) = $ESPERADO_LINHAS (obtido: $GRAO)" \
-  test "$GRAO" = "$ESPERADO_LINHAS,$ESPERADO_LINHAS"
+checa "count(*) = count(DISTINCT id_pedido) = $ESPERADO_LINHAS (obtido: ${GRAO%,*})" \
+  test "${GRAO%,*}" = "$ESPERADO_LINHAS,$ESPERADO_LINHAS"
+checa "campo vazio lido como nulo: motivo_exclusao IS NULL em $ESPERADO_ELEGIVEIS_BASE linhas (obtido: ${GRAO##*,})" \
+  test "${GRAO##*,}" = "$ESPERADO_ELEGIVEIS_BASE"
 
 criterio "Pergunta respondida no Athena com custo por consulta medido"
 QID=$(athena_executa "$(cat "$PARTE1/consulta/pergunta.sql")" "$BANCO" "$WG")
