@@ -109,10 +109,13 @@ calculado, não o valor da fatura. O workgroup impõe sua configuração e corta
 52.428.800 bytes (50 MiB). **Aceitamos perder** consultas que leiam mais de 50 MiB, que nesta
 tabela só aconteceriam com erro (por exemplo, uma junção cruzada).
 
-> **Medido:** pergunta com estado `SUCCEEDED`, 11.167.989 bytes varridos, 1.006 ms de motor e
-> custo calculado de US$ 0,0000600000 (execução `145bae2d-8639-454c-b711-e1a550bd64c1`, em
-> desenvolvimento; a execução registrada está em `evidencias/`). O teto de 52.428.800 bytes vale
-> 4,69 vezes a varredura completa: permite qualquer consulta legítima e corta erros grosseiros.
+> **Medido:** na execução registrada, pergunta com estado `SUCCEEDED`, 11.167.989 bytes
+> varridos, 1.240 ms de motor e custo calculado de US$ 0,0000600000 (12 MB cobrados; execução
+> `71812375-ef2c-47b6-9cbf-b3d1cd6e98be`, em
+> `evidencias/execucao-20261001T230857Z/consulta-execucao.txt`). Em desenvolvimento, a mesma
+> consulta varreu os mesmos 11.167.989 bytes (execução `145bae2d-8639-454c-b711-e1a550bd64c1`).
+> O teto de 52.428.800 bytes vale 4,69 vezes a varredura completa: permite qualquer consulta
+> legítima e corta erros grosseiros.
 
 ## DECISÃO 09: Carga dos dados via aws_s3_object
 
@@ -124,7 +127,9 @@ fora do state. **Aceitamos perder** repositório leve: os dados ficam versionado
 
 > **Medido:** 3 objetos, com 17.654.914 + 9.033.957 + 11.167.989 = 37.856.860 bytes. O
 > `terraform apply` da raiz cria 13 recursos, incluindo os 3 objetos, e o `destroy` remove os 13
-> (`evidencias/`). Após o apply, `plan -detailed-exitcode` devolve 0 (nada a reenviar).
+> (`evidencias/execucao-20261001T230857Z/07-apply.txt` e `10-destroy.txt`). O pós-destroy
+> encontra 0 buckets do grupo (`12-pos-destroy.txt`). Após o apply, `plan -detailed-exitcode`
+> devolve 0 (nada a reenviar; critério 2 em `09-verificacao.txt`).
 
 ## DECISÃO 10: Backend com bootstrap, trava DynamoDB e workspace av1
 
@@ -136,7 +141,8 @@ aplicado por vez. **Aceitamos** o aviso de depreciação do `dynamodb_table` no 
 porque o guia exige DynamoDB, e a ordem obrigatória do destroy: primeiro a raiz, depois o
 bootstrap.
 
-> **Medido:** bootstrap com 5 recursos e raiz com 13. State em
+> **Medido:** bootstrap com 5 recursos e raiz com 13; ciclo completo do zero ao pós-destroy em
+> 4 min 34 s (`evidencias/execucao-20261001T230857Z/`). State em
 > `s3://eda262-g02-tfstate/eda262-g02/av1/parte-1/terraform.tfstate` (28.946 bytes após o
 > apply). `plan` no workspace `default` termina com erro de precondição (código 1); no `av1`,
 > `plan -detailed-exitcode` devolve 0 após o apply.

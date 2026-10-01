@@ -1,0 +1,13 @@
+$ bash verificacao/verifica.sh --pos-destroy
+# inicio (UTC): 2026-10-01T23:13:15Z
+
+== Criterio 1: Destroy limpo: nenhum recurso eda262-g02 restante (Guia 4.1 e 06)
+PASSA  nenhum bucket eda262-g02-* (encontrados: 0)
+PASSA  nenhum Glue database eda262_g02_* (encontrados: 0)
+PASSA  nenhum workgroup eda262-g02-* (encontrados: 0)
+PASSA  nenhuma tabela DynamoDB eda262-g02-* (encontradas: 0)
+INFO   recursos ainda indexados com tag grupo=g02: 0 (a API de tags pode levar minutos para refletir exclusoes)
+   => criterio 1: PASSA
+
+== RESUMO: 1 de 1 criterios PASSA
+# fim (UTC): 2026-10-01T23:13:31Z | codigo de saida: 0

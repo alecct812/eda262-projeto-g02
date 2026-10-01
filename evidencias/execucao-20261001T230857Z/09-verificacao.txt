@@ -1,0 +1,64 @@
+$ bash verificacao/verifica.sh
+# inicio (UTC): 2026-10-01T23:11:09Z
+
+== Criterio 1: Bucket, catalogo (Glue Data Catalog) e workgroup do Athena provisionados
+PASSA  bucket eda262-g02-lake-raw existe
+PASSA  bucket eda262-g02-lake-trusted existe
+PASSA  bucket eda262-g02-athena-results existe
+PASSA  Glue database eda262_g02_entregas_ecommerce existe
+PASSA  workgroup eda262-g02-wg existe e esta ENABLED
+   => criterio 1: PASSA
+
+== Criterio 2: Stack em modulo, backend remoto S3 + DynamoDB e workspace
+PASSA  raiz chama module "lake"
+PASSA  backend s3 declarado
+PASSA  trava DynamoDB declarada no backend
+PASSA  workspace atual (av1) e nomeado, diferente de default
+PASSA  state remoto em s3://eda262-g02-tfstate/eda262-g02/av1/parte-1/terraform.tfstate
+PASSA  tabela de trava eda262-g02-tflock ACTIVE
+PASSA  plan sem mudancas pendentes: infraestrutura igual ao codigo (rc=0)
+   => criterio 2: PASSA
+
+== Criterio 3: Schema declarado no IaC, sem Crawler
+PASSA  nenhum aws_glue_crawler no codigo
+PASSA  tabela pedidos_entrega com 10 colunas declaradas (obtido: 10)
+PASSA  SerDe declarado: LazySimpleSerDe
+   => criterio 3: PASSA
+
+== Criterio 4: Tabela trusted modelada com grao declarado (uma linha por pedido)
+PASSA  consulta de grao SUCCEEDED
+PASSA  count(*) = count(DISTINCT id_pedido) = 99441 (obtido: 99441,99441)
+   => criterio 4: PASSA
+
+== Criterio 5: Pergunta respondida no Athena com custo por consulta medido
+PASSA  pergunta SUCCEEDED (execucao 48374482-4e26-446e-86a4-aaff7d7d95b6)
+PASSA  27 UFs no resultado (obtido: 27)
+PASSA  totais iguais ao calculo local: 96203 elegiveis, 6531 atrasados (obtido: 96203,6531)
+PASSA  bytes varridos medidos: 11167989
+INFO   custo calculado da consulta: US$ 0.0000600000 (US$ 5.00 por TB, minimo 10 MB)
+   => criterio 5: PASSA
+
+== Criterio 6: Tags obrigatorias (turma, grupo, projeto) nos recursos que aceitam tags
+PASSA  tags no bucket eda262-g02-lake-raw
+PASSA  tags no bucket eda262-g02-lake-trusted
+PASSA  tags no bucket eda262-g02-athena-results
+PASSA  tags no bucket eda262-g02-tfstate
+PASSA  tags no workgroup eda262-g02-wg
+PASSA  tags no Glue database eda262_g02_entregas_ecommerce
+PASSA  tags na tabela de trava eda262-g02-tflock
+PASSA  tags no objeto trusted pedidos_entrega.csv
+INFO   tabela Glue e consulta salva do Athena nao aceitam tags (documentado no README)
+   => criterio 6: PASSA
+
+== Criterio 7: DECISOES.md com grao, chaves, particao, formato e custo
+PASSA  DECISOES.md existe na raiz
+PASSA  DECISOES.md trata de: Grão
+PASSA  DECISOES.md trata de: Chave
+PASSA  DECISOES.md trata de: Partição
+PASSA  DECISOES.md trata de: Formato
+PASSA  DECISOES.md trata de: Custo
+PASSA  DECISOES.md traz numeros medidos (blocos Medido:)
+   => criterio 7: PASSA
+
+== RESUMO: 7 de 7 criterios PASSA
+# fim (UTC): 2026-10-01T23:12:39Z | codigo de saida: 0

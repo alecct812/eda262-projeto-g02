@@ -1,0 +1,33 @@
+$ terraform -chdir=parte-1 init -input=false -no-color -reconfigure
+# inicio (UTC): 2026-10-01T23:09:31Z
+Initializing the backend...
+
+Successfully configured the backend "s3"! Terraform will automatically
+use this backend unless the backend configuration changes.
+
+Initializing modules...
+- lake in modules\lake
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using hashicorp/aws v5.100.0 from the shared cache directory
+
+
+
+Warning: Deprecated Parameter
+
+  on backend.tf line 10, in terraform:
+  10:     dynamodb_table       = "eda262-g02-tflock"
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+# fim (UTC): 2026-10-01T23:09:39Z | codigo de saida: 0
