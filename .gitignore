@@ -12,3 +12,5 @@ crash.log
 # Python
 __pycache__/
 *.pyc
+# Saidas de execucoes manuais (a evidencia oficial fica em evidencias/execucao-*)
+/evidencias/manual/
