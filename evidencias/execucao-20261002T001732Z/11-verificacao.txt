@@ -1,5 +1,6 @@
 $ bash verificacao/verifica.sh
-# inicio (UTC): 2026-10-01T23:11:09Z
+# inicio (UTC): 2026-10-02T00:19:05Z
+Regiao: us-east-1 | grupo: g02
 
 == Criterio 1: Bucket, catalogo (Glue Data Catalog) e workgroup do Athena provisionados
 PASSA  bucket eda262-g02-lake-raw existe
@@ -28,10 +29,11 @@ PASSA  SerDe declarado: LazySimpleSerDe
 == Criterio 4: Tabela trusted modelada com grao declarado (uma linha por pedido)
 PASSA  consulta de grao SUCCEEDED
 PASSA  count(*) = count(DISTINCT id_pedido) = 99441 (obtido: 99441,99441)
+PASSA  campo vazio lido como nulo: motivo_exclusao IS NULL em 96470 linhas (obtido: 96470)
    => criterio 4: PASSA
 
 == Criterio 5: Pergunta respondida no Athena com custo por consulta medido
-PASSA  pergunta SUCCEEDED (execucao 48374482-4e26-446e-86a4-aaff7d7d95b6)
+PASSA  pergunta SUCCEEDED (execucao 81a52669-6f54-47c5-bfd9-3ad910424826)
 PASSA  27 UFs no resultado (obtido: 27)
 PASSA  totais iguais ao calculo local: 96203 elegiveis, 6531 atrasados (obtido: 96203,6531)
 PASSA  bytes varridos medidos: 11167989
@@ -61,4 +63,4 @@ PASSA  DECISOES.md traz numeros medidos (blocos Medido:)
    => criterio 7: PASSA
 
 == RESUMO: 7 de 7 criterios PASSA
-# fim (UTC): 2026-10-01T23:12:39Z | codigo de saida: 0
+# fim (UTC): 2026-10-02T00:20:16Z | codigo de saida: 0

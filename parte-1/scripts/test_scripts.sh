@@ -55,7 +55,8 @@ esac
 exit 0
 EOF
 chmod +x "$TMP/bin/aws" "$TMP/bin/terraform"
-cp "$RAIZ/evidencias/execucao-20261001T230857Z/consulta-resultado.csv" "$TMP/pergunta.csv"
+printf '%s\n' '"uf_cliente","pedidos_elegiveis","pedidos_atrasados","taxa_atraso_pct","media_dias_atraso"' \
+  '"SP","40399","1817","4.5","8.3"' > "$TMP/pergunta.csv"
 export PATH="$TMP/bin:$PATH"
 
 # 1. Criterio 4 detecta campo vazio que nao virou nulo (Review Focus 4)

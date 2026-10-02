@@ -1,5 +1,5 @@
 $ terraform -chdir=parte-1/bootstrap apply -auto-approve -input=false -no-color
-# inicio (UTC): 2026-10-01T23:09:16Z
+# inicio (UTC): 2026-10-02T00:17:51Z
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
@@ -119,14 +119,14 @@ Plan: 5 to add, 0 to change, 0 to destroy.
 Changes to Outputs:
   + bucket_state = "eda262-g02-tfstate"
   + tabela_trava = "eda262-g02-tflock"
-aws_s3_bucket.state: Creating...
 aws_dynamodb_table.trava: Creating...
+aws_s3_bucket.state: Creating...
 aws_s3_bucket.state: Creation complete after 4s [id=eda262-g02-tfstate]
+aws_s3_bucket_public_access_block.state: Creating...
 aws_s3_bucket_versioning.state: Creating...
 aws_s3_bucket_server_side_encryption_configuration.state: Creating...
-aws_s3_bucket_public_access_block.state: Creating...
-aws_s3_bucket_server_side_encryption_configuration.state: Creation complete after 0s [id=eda262-g02-tfstate]
-aws_s3_bucket_public_access_block.state: Creation complete after 1s [id=eda262-g02-tfstate]
+aws_s3_bucket_public_access_block.state: Creation complete after 0s [id=eda262-g02-tfstate]
+aws_s3_bucket_server_side_encryption_configuration.state: Creation complete after 1s [id=eda262-g02-tfstate]
 aws_s3_bucket_versioning.state: Creation complete after 2s [id=eda262-g02-tfstate]
 aws_dynamodb_table.trava: Creation complete after 9s [id=eda262-g02-tflock]
 
@@ -136,4 +136,4 @@ Outputs:
 
 bucket_state = "eda262-g02-tfstate"
 tabela_trava = "eda262-g02-tflock"
-# fim (UTC): 2026-10-01T23:09:30Z | codigo de saida: 0
+# fim (UTC): 2026-10-02T00:18:04Z | codigo de saida: 0

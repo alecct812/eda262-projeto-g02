@@ -1,10 +1,10 @@
-data_execucao_utc=2026-10-01T23:11:04Z
-query_execution_id=71812375-ef2c-47b6-9cbf-b3d1cd6e98be
+data_execucao_utc=2026-10-02T00:19:01Z
+query_execution_id=dec4ad26-b1c2-4bd7-831c-614dce443259
 workgroup=eda262-g02-wg
 banco=eda262_g02_entregas_ecommerce
 estado=SUCCEEDED
 bytes_varridos=11167989
-tempo_motor_ms=1240
+tempo_motor_ms=945
 preco_usd_por_tb=5.00
 minimo_cobrado_bytes=10000000
 custo_calculado_usd=0.0000600000

@@ -1,19 +1,17 @@
-$ terraform -chdir=parte-1 apply -auto-approve -input=false -no-color
-# inicio (UTC): 2026-10-01T23:09:43Z
+$ bash -c terraform -chdir=parte-1 plan -input=false -no-color; rc=$?; echo "codigo de saida do plan no workspace default: $rc (esperado: 1, precondicao)"; test "$rc" -eq 1
+# inicio (UTC): 2026-10-02T00:18:11Z
 
 Warning: Deprecated Parameter
 
 The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
 instead.
 Acquiring state lock. This may take a few moments...
-data.aws_region.atual: Reading...
-data.aws_region.atual: Read complete after 0s [id=us-east-1]
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
   + create
 
-Terraform will perform the following actions:
+Terraform planned the following actions, but then encountered a problem:
 
   # module.lake.aws_athena_named_query.pergunta will be created
   + resource "aws_athena_named_query" "pergunta" {
@@ -52,7 +50,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
 
       + configuration {
@@ -83,7 +81,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
 
       + create_table_default_permission (known after apply)
@@ -194,7 +192,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + website_domain              = (known after apply)
       + website_endpoint            = (known after apply)
@@ -238,7 +236,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + website_domain              = (known after apply)
       + website_endpoint            = (known after apply)
@@ -282,7 +280,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + website_domain              = (known after apply)
       + website_endpoint            = (known after apply)
@@ -361,7 +359,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + version_id             = (known after apply)
     }
@@ -391,7 +389,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + version_id             = (known after apply)
     }
@@ -421,7 +419,7 @@ Terraform will perform the following actions:
           + "grupo"     = "g02"
           + "projeto"   = "engenharia-de-dados"
           + "turma"     = "eda262"
-          + "workspace" = "av1"
+          + "workspace" = "default"
         }
       + version_id             = (known after apply)
     }
@@ -435,58 +433,17 @@ Changes to Outputs:
   + bucket_trusted    = "eda262-g02-lake-trusted"
   + consulta_salva_id = (known after apply)
   + local_trusted     = "s3://eda262-g02-lake-trusted/pedidos_entrega/"
-  + regiao            = "us-east-1"
   + tabela_glue       = "pedidos_entrega"
   + workgroup         = "eda262-g02-wg"
-module.lake.aws_glue_catalog_database.this: Creating...
-module.lake.aws_s3_bucket.this["trusted"]: Creating...
-module.lake.aws_s3_bucket.this["resultados"]: Creating...
-module.lake.aws_s3_bucket.this["raw"]: Creating...
-module.lake.aws_glue_catalog_database.this: Creation complete after 1s [id=<ACCOUNT_ID>:eda262_g02_entregas_ecommerce]
-module.lake.aws_s3_bucket.this["trusted"]: Creation complete after 4s [id=eda262-g02-lake-trusted]
-module.lake.aws_s3_bucket.this["resultados"]: Creation complete after 4s [id=eda262-g02-athena-results]
-module.lake.aws_athena_workgroup.this: Creating...
-module.lake.aws_s3_object.trusted: Creating...
-module.lake.aws_s3_bucket.this["raw"]: Creation complete after 4s [id=eda262-g02-lake-raw]
-module.lake.aws_s3_bucket_public_access_block.this["raw"]: Creating...
-module.lake.aws_s3_bucket_public_access_block.this["resultados"]: Creating...
-module.lake.aws_s3_bucket_public_access_block.this["trusted"]: Creating...
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Creating...
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Creating...
-module.lake.aws_s3_bucket_public_access_block.this["resultados"]: Creation complete after 1s [id=eda262-g02-athena-results]
-module.lake.aws_athena_workgroup.this: Creation complete after 1s [id=eda262-g02-wg]
-module.lake.aws_athena_named_query.pergunta: Creating...
-module.lake.aws_s3_bucket_public_access_block.this["trusted"]: Creation complete after 2s [id=eda262-g02-lake-trusted]
-module.lake.aws_s3_bucket_public_access_block.this["raw"]: Creation complete after 2s [id=eda262-g02-lake-raw]
-module.lake.aws_athena_named_query.pergunta: Creation complete after 2s [id=a18d1f93-3673-413c-909a-464177776ace]
-module.lake.aws_s3_object.trusted: Still creating... [00m10s elapsed]
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Still creating... [00m10s elapsed]
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Still creating... [00m10s elapsed]
-module.lake.aws_s3_object.trusted: Still creating... [00m20s elapsed]
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Still creating... [00m20s elapsed]
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Still creating... [00m20s elapsed]
-module.lake.aws_s3_object.trusted: Still creating... [00m30s elapsed]
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Still creating... [00m30s elapsed]
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Still creating... [00m30s elapsed]
-module.lake.aws_s3_object.trusted: Creation complete after 38s [id=pedidos_entrega/pedidos_entrega.csv]
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Still creating... [00m40s elapsed]
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Still creating... [00m40s elapsed]
-module.lake.aws_glue_catalog_table.pedidos_entrega: Creating...
-module.lake.aws_glue_catalog_table.pedidos_entrega: Creation complete after 4s [id=<ACCOUNT_ID>:eda262_g02_entregas_ecommerce:pedidos_entrega]
-module.lake.aws_s3_object.raw["olist/customers/olist_customers_dataset.csv"]: Creation complete after 46s [id=olist/customers/olist_customers_dataset.csv]
-module.lake.aws_s3_object.raw["olist/orders/olist_orders_dataset.csv"]: Creation complete after 49s [id=olist/orders/olist_orders_dataset.csv]
 
-Apply complete! Resources: 13 added, 0 changed, 0 destroyed.
+Error: Resource precondition failed
 
-Outputs:
+  on main.tf line 5, in data "aws_region" "atual":
+   5:       condition     = terraform.workspace != "default"
+    ├────────────────
+    │ terraform.workspace is "default"
 
-banco_glue = "eda262_g02_entregas_ecommerce"
-bucket_raw = "eda262-g02-lake-raw"
-bucket_resultados = "eda262-g02-athena-results"
-bucket_trusted = "eda262-g02-lake-trusted"
-consulta_salva_id = "a18d1f93-3673-413c-909a-464177776ace"
-local_trusted = "s3://eda262-g02-lake-trusted/pedidos_entrega/"
-regiao = "us-east-1"
-tabela_glue = "pedidos_entrega"
-workgroup = "eda262-g02-wg"
-# fim (UTC): 2026-10-01T23:10:47Z | codigo de saida: 0
+Workspace default bloqueado. Rode: terraform -chdir=parte-1 workspace select
+-or-create av1
+codigo de saida do plan no workspace default: 1 (esperado: 1, precondicao)
+# fim (UTC): 2026-10-02T00:18:19Z | codigo de saida: 0

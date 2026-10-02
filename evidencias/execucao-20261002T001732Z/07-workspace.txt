@@ -1,5 +1,5 @@
 $ terraform -chdir=parte-1 workspace select -or-create av1
-# inicio (UTC): 2026-10-01T23:09:39Z
+# inicio (UTC): 2026-10-02T00:18:19Z
 [33m[33m╷[0m[0m
 [33m│[0m [0m[1m[33mWarning: [0m[0m[1mDeprecated Parameter[0m
 [33m│[0m [0m
@@ -12,4 +12,4 @@ $ terraform -chdir=parte-1 workspace select -or-create av1
 You're now on a new, empty workspace. Workspaces isolate their state,
 so if you run "terraform plan" Terraform will not see any existing state
 for this configuration.[0m
-# fim (UTC): 2026-10-01T23:09:43Z | codigo de saida: 0
+# fim (UTC): 2026-10-02T00:18:23Z | codigo de saida: 0

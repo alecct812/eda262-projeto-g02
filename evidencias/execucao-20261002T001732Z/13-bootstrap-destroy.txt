@@ -1,9 +1,9 @@
 $ terraform -chdir=parte-1/bootstrap destroy -auto-approve -input=false -no-color
-# inicio (UTC): 2026-10-01T23:12:56Z
+# inicio (UTC): 2026-10-02T00:20:31Z
 aws_dynamodb_table.trava: Refreshing state... [id=eda262-g02-tflock]
 aws_s3_bucket.state: Refreshing state... [id=eda262-g02-tfstate]
-aws_s3_bucket_versioning.state: Refreshing state... [id=eda262-g02-tfstate]
 aws_s3_bucket_public_access_block.state: Refreshing state... [id=eda262-g02-tfstate]
+aws_s3_bucket_versioning.state: Refreshing state... [id=eda262-g02-tfstate]
 aws_s3_bucket_server_side_encryption_configuration.state: Refreshing state... [id=eda262-g02-tfstate]
 
 Terraform used the selected providers to generate the following execution
@@ -137,16 +137,16 @@ Plan: 0 to add, 0 to change, 5 to destroy.
 Changes to Outputs:
   - bucket_state = "eda262-g02-tfstate" -> null
   - tabela_trava = "eda262-g02-tflock" -> null
-aws_s3_bucket_public_access_block.state: Destroying... [id=eda262-g02-tfstate]
 aws_s3_bucket_versioning.state: Destroying... [id=eda262-g02-tfstate]
 aws_s3_bucket_server_side_encryption_configuration.state: Destroying... [id=eda262-g02-tfstate]
+aws_s3_bucket_public_access_block.state: Destroying... [id=eda262-g02-tfstate]
 aws_dynamodb_table.trava: Destroying... [id=eda262-g02-tflock]
-aws_s3_bucket_public_access_block.state: Destruction complete after 1s
+aws_s3_bucket_public_access_block.state: Destruction complete after 0s
 aws_s3_bucket_server_side_encryption_configuration.state: Destruction complete after 1s
 aws_s3_bucket_versioning.state: Destruction complete after 1s
 aws_s3_bucket.state: Destroying... [id=eda262-g02-tfstate]
 aws_s3_bucket.state: Destruction complete after 1s
-aws_dynamodb_table.trava: Destruction complete after 8s
+aws_dynamodb_table.trava: Destruction complete after 7s
 
 Destroy complete! Resources: 5 destroyed.
-# fim (UTC): 2026-10-01T23:13:14Z | codigo de saida: 0
+# fim (UTC): 2026-10-02T00:20:48Z | codigo de saida: 0

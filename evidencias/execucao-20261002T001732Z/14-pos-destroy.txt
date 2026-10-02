@@ -1,5 +1,6 @@
 $ bash verificacao/verifica.sh --pos-destroy
-# inicio (UTC): 2026-10-01T23:08:57Z
+# inicio (UTC): 2026-10-02T00:20:48Z
+Regiao: us-east-1 | grupo: g02
 
 == Criterio 1: Destroy limpo: nenhum recurso eda262-g02 restante (Guia 4.1 e 06)
 PASSA  nenhum bucket eda262-g02-* (encontrados: 0)
@@ -10,4 +11,4 @@ INFO   recursos ainda indexados com tag grupo=g02: 0 (a API de tags pode levar m
    => criterio 1: PASSA
 
 == RESUMO: 1 de 1 criterios PASSA
-# fim (UTC): 2026-10-01T23:09:11Z | codigo de saida: 0
+# fim (UTC): 2026-10-02T00:21:01Z | codigo de saida: 0

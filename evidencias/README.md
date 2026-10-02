@@ -1,13 +1,13 @@
 # Evidências da execução registrada
 
-Execução: `evidencias/execucao-20261001T230857Z/`, gerada em 01/10/2026 (UTC) por
+Execução: `evidencias/execucao-20261002T001732Z/`, gerada em 02/10/2026 (UTC) por
 `AWS_PROFILE=<perfil do grupo> bash parte-1/scripts/ciclo_completo.sh`, a partir de um **clone
 limpo** do repositório (só arquivos versionados) e numa conta sem nenhum recurso `eda262-g02`.
-Cada arquivo traz o comando executado, o horário de início e de fim (UTC), a saída completa e o
-código de saída. O ID da conta AWS foi substituído por `<ACCOUNT_ID>`.
+Cada arquivo traz o comando executado, o horário de início e de fim (UTC, relógio da máquina
+local), a saída completa e o código de saída. O ID da conta AWS foi substituído por `<ACCOUNT_ID>`.
 
 Ambiente: Terraform v1.15.8, provider aws 5.100.0, aws-cli 2.34.54, Git Bash (MINGW64) no
-Windows 11, região us-east-1. Duração total: 4 min 34 s (23:08:57 a 23:13:31 UTC).
+Windows 11, região us-east-1. Duração total: 3 min 29 s (00:17:32 a 00:21:01 UTC).
 
 | # | Etapa | Comando | Resultado | Arquivo |
 | --- | --- | --- | --- | --- |
@@ -16,13 +16,15 @@ Windows 11, região us-east-1. Duração total: 4 min 34 s (23:08:57 a 23:13:31 
 | 03 | Init do backend | `terraform -chdir=parte-1/bootstrap init` | provider aws 5.100.0 instalado conforme o lock | `03-bootstrap-init.txt` |
 | 04 | Apply do backend | `terraform -chdir=parte-1/bootstrap apply -auto-approve` | Apply complete! Resources: 5 added | `04-bootstrap-apply.txt` |
 | 05 | Init da raiz | `terraform -chdir=parte-1 init -reconfigure` | Successfully configured the backend "s3" (com aviso esperado de depreciação do `dynamodb_table`) | `05-init.txt` |
-| 06 | Workspace | `terraform -chdir=parte-1 workspace select -or-create av1` | Created and switched to workspace "av1" | `06-workspace.txt` |
-| 07 | Apply do Data Lake | `terraform -chdir=parte-1 apply -auto-approve` | Apply complete! Resources: 13 added (3 buckets, 3 bloqueios públicos, 3 objetos, Glue database e tabela, workgroup, consulta salva) | `07-apply.txt` |
-| 08 | Pergunta no Athena | `bash parte-1/consulta/consulta.sh` | SUCCEEDED, 11.167.989 bytes varridos, custo calculado US$ 0,00006, 27 UFs | `08-consulta.txt`, `consulta-execucao.txt`, `consulta-resultado.csv` |
-| 09 | Verificação de aceite | `bash verificacao/verifica.sh` | 7 de 7 critérios PASSA | `09-verificacao.txt` |
-| 10 | Destroy do Data Lake | `terraform -chdir=parte-1 destroy -auto-approve` | Destroy complete! Resources: 13 destroyed | `10-destroy.txt` |
-| 11 | Destroy do backend | `terraform -chdir=parte-1/bootstrap destroy -auto-approve` | Destroy complete! Resources: 5 destroyed | `11-bootstrap-destroy.txt` |
-| 12 | Pós-destroy (sem órfãos) | `bash verificacao/verifica.sh --pos-destroy` | 0 recursos do grupo restantes; 1 de 1 critérios PASSA | `12-pos-destroy.txt` |
+| 06 | Bloqueio do workspace default | `terraform -chdir=parte-1 plan` no workspace `default` | Error: Resource precondition failed; código de saída 1, como esperado | `06-workspace-default-bloqueado.txt` |
+| 07 | Workspace | `terraform -chdir=parte-1 workspace select -or-create av1` | Created and switched to workspace "av1" | `07-workspace.txt` |
+| 08 | Apply do Data Lake | `terraform -chdir=parte-1 apply -auto-approve` | Apply complete! Resources: 13 added (3 buckets, 3 bloqueios públicos, 3 objetos, Glue database e tabela, workgroup, consulta salva) | `08-apply.txt` |
+| 09 | State remoto | `aws s3api head-object` em `eda262-g02/av1/parte-1/terraform.tfstate` | 28.946 bytes no bucket `eda262-g02-tfstate` | `09-state-remoto.txt` |
+| 10 | Pergunta no Athena | `bash parte-1/consulta/consulta.sh` | SUCCEEDED, 11.167.989 bytes varridos, custo calculado US$ 0,00006, 27 UFs | `10-consulta.txt`, `consulta-execucao.txt`, `consulta-resultado.csv` |
+| 11 | Verificação de aceite | `bash verificacao/verifica.sh` | 7 de 7 critérios PASSA (inclui grão 99.441 = 99.441 e 96.470 nulos em `motivo_exclusao`) | `11-verificacao.txt` |
+| 12 | Destroy do Data Lake | `terraform -chdir=parte-1 destroy -auto-approve` | Destroy complete! Resources: 13 destroyed | `12-destroy.txt` |
+| 13 | Destroy do backend | `terraform -chdir=parte-1/bootstrap destroy -auto-approve` | Destroy complete! Resources: 5 destroyed | `13-bootstrap-destroy.txt` |
+| 14 | Pós-destroy (sem órfãos) | `bash verificacao/verifica.sh --pos-destroy` | 0 recursos do grupo restantes; 1 de 1 critérios PASSA | `14-pos-destroy.txt` |
 
 ## Consulta e custo
 
@@ -30,16 +32,17 @@ Arquivo `consulta-execucao.txt`:
 
 | Campo | Valor |
 | --- | --- |
-| ID da execução | `71812375-ef2c-47b6-9cbf-b3d1cd6e98be` |
+| ID da execução | `dec4ad26-b1c2-4bd7-831c-614dce443259` |
 | Estado | SUCCEEDED |
 | Bytes varridos (`DataScannedInBytes`) | 11.167.989 |
-| Tempo de motor | 1.240 ms |
+| Tempo de motor | 945 ms |
 | Preço | US$ 5,00 por TB (us-east-1), mínimo de 10 MB por consulta |
 | Custo calculado | 12 MB x US$ 5,00 / TB = **US$ 0,00006** |
 
-A verificação (etapa 09) executou a pergunta de novo (execução
-`48374482-4e26-446e-86a4-aaff7d7d95b6`) e conferiu 27 UFs com 96.203 pedidos elegíveis e 6.531
-atrasados, os mesmos totais do cálculo local do preparo (`parte-1/dados/trusted/manifesto.json`).
+A verificação (etapa 11) executou a pergunta de novo (execução
+`81a52669-6f54-47c5-bfd9-3ad910424826`, também 11.167.989 bytes) e conferiu 27 UFs com 96.203
+pedidos elegíveis e 6.531 atrasados, os mesmos totais do cálculo local do preparo
+(`parte-1/dados/trusted/manifesto.json`).
 
 ## Resposta da pergunta
 
