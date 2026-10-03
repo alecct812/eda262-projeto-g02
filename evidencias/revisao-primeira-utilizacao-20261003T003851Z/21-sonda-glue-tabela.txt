@@ -1,0 +1,67 @@
+# objetivo: Guia 4.1 (schema declarado no IaC, trusted com grao): definicao real da tabela no Glue Data Catalog
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; aws glue get-table --database-name eda262_g02_entregas_ecommerce --name pedidos_entrega --query "Table.{tipo:TableType,parametros:Parameters,local:StorageDescriptor.Location,serde:StorageDescriptor.SerdeInfo,colunas:StorageDescriptor.Columns[].[Name,Type],criada_por:CreatedBy}" --output json
+# inicio (UTC): 2026-10-03T00:48:20Z
+# ---- saida ----
+{
+    "tipo": "EXTERNAL_TABLE",
+    "parametros": {
+        "skip.header.line.count": "1",
+        "classification": "csv",
+        "EXTERNAL": "TRUE"
+    },
+    "local": "s3://eda262-g02-lake-trusted/pedidos_entrega/",
+    "serde": {
+        "Name": "csv-sem-aspas",
+        "SerializationLibrary": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+        "Parameters": {
+            "serialization.format": ",",
+            "serialization.null.format": "",
+            "field.delim": ","
+        }
+    },
+    "colunas": [
+        [
+            "id_pedido",
+            "string"
+        ],
+        [
+            "uf_cliente",
+            "string"
+        ],
+        [
+            "status_pedido",
+            "string"
+        ],
+        [
+            "data_hora_compra",
+            "timestamp"
+        ],
+        [
+            "data_prevista_entrega",
+            "date"
+        ],
+        [
+            "data_hora_entrega",
+            "timestamp"
+        ],
+        [
+            "elegivel",
+            "boolean"
+        ],
+        [
+            "atrasado",
+            "boolean"
+        ],
+        [
+            "dias_atraso",
+            "int"
+        ],
+        [
+            "motivo_exclusao",
+            "string"
+        ]
+    ],
+    "criada_por": "arn:aws:iam::<ACCOUNT_ID>:user/eda-grupo02"
+}
+# ---- fim (UTC): 2026-10-03T00:48:25Z | codigo de saida: 0

@@ -1,0 +1,19 @@
+# objetivo: Guia 5 (tags obrigatorias em todo recurso): inventario independente de tags de cada recurso do grupo, inclusive os objetos raw que o verifica nao confere
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; echo "== recursos indexados com grupo=g02 (API de tags):"; aws resourcegroupstaggingapi get-resources --tag-filters Key=grupo,Values=g02 --query "ResourceTagMappingList[].[ResourceARN, join(\`,\`, Tags[].join(\`=\`, [Key, Value]))]" --output text; for k in olist/orders/olist_orders_dataset.csv olist/customers/olist_customers_dataset.csv; do echo "== tags do objeto raw $k:"; aws s3api get-object-tagging --bucket eda262-g02-lake-raw --key $k --query "TagSet[].join(\`=\`,[Key,Value])" --output text; done; echo "== tabela Glue (tags):"; aws glue get-tags --resource-arn "arn:aws:glue:us-east-1:$(conta_aws):table/eda262_g02_entregas_ecommerce/pedidos_entrega" --output text 2>&1 | head -n 3
+# inicio (UTC): 2026-10-03T00:48:03Z
+# ---- saida ----
+== recursos indexados com grupo=g02 (API de tags):
+arn:aws:athena:us-east-1:<ACCOUNT_ID>:workgroup/eda262-g02-wg	workspace=av1,projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:s3:::eda262-g02-tfstate	projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:s3:::eda262-g02-lake-trusted	workspace=av1,projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:s3:::eda262-g02-lake-raw	workspace=av1,projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:glue:us-east-1:<ACCOUNT_ID>:database/eda262_g02_entregas_ecommerce	workspace=av1,projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:dynamodb:us-east-1:<ACCOUNT_ID>:table/eda262-g02-tflock	projeto=engenharia-de-dados,grupo=g02,turma=eda262
+arn:aws:s3:::eda262-g02-athena-results	workspace=av1,projeto=engenharia-de-dados,grupo=g02,turma=eda262
+== tags do objeto raw olist/orders/olist_orders_dataset.csv:
+workspace=av1	projeto=engenharia-de-dados	grupo=g02	turma=eda262
+== tags do objeto raw olist/customers/olist_customers_dataset.csv:
+workspace=av1	projeto=engenharia-de-dados	grupo=g02	turma=eda262
+== tabela Glue (tags):
+# ---- fim (UTC): 2026-10-03T00:48:20Z | codigo de saida: 0

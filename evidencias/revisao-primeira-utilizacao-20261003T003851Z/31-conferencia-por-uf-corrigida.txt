@@ -1,0 +1,50 @@
+# objetivo: Refazer a etapa 30 (script em arquivo): comparar as 27 linhas do Athena com o calculo local do preparo, UF a UF
+# diretorio: eda262-g02-revisao
+# comando: cat /tmp/sondas/por_uf.py; echo "== execucao:"; python /tmp/sondas/por_uf.py
+# inicio (UTC): 2026-10-03T00:51:34Z
+# ---- saida ----
+import csv, json
+m = json.load(open("parte-1/dados/trusted/manifesto.json", encoding="utf-8"))["pergunta_referencia"]["por_uf"]
+ath = {r["uf_cliente"]: r for r in csv.DictReader(open("evidencias/manual/consulta-resultado.csv", encoding="utf-8"))}
+dif = 0
+for uf, loc in sorted(m.items()):
+    a = ath.get(uf)
+    taxa = round(100 * loc["atrasados"] / loc["elegiveis"], 2)
+    ok = (a is not None and int(a["pedidos_elegiveis"]) == loc["elegiveis"]
+          and int(a["pedidos_atrasados"]) == loc["atrasados"]
+          and abs(float(a["taxa_atraso_pct"]) - taxa) < 0.006)
+    dif += not ok
+    print(f"{uf}: athena {a['pedidos_elegiveis']} elegiveis, {a['pedidos_atrasados']} atrasados, {a['taxa_atraso_pct']}% | "
+          f"local {loc['elegiveis']}, {loc['atrasados']}, {taxa}% | {'OK' if ok else 'DIFERENTE'}")
+print("UFs no Athena:", len(ath), "| UFs no calculo local:", len(m), "| divergencias:", dif)
+raise SystemExit(1 if dif or len(ath) != len(m) else 0)
+== execucao:
+AC: athena 80 elegiveis, 3 atrasados, 3.75% | local 80, 3, 3.75% | OK
+AL: athena 396 elegiveis, 85 atrasados, 21.46% | local 396, 85, 21.46% | OK
+AM: athena 145 elegiveis, 4 atrasados, 2.76% | local 145, 4, 2.76% | OK
+AP: athena 67 elegiveis, 2 atrasados, 2.99% | local 67, 2, 2.99% | OK
+BA: athena 3253 elegiveis, 396 atrasados, 12.17% | local 3253, 396, 12.17% | OK
+CE: athena 1273 elegiveis, 176 atrasados, 13.83% | local 1273, 176, 13.83% | OK
+DF: athena 2074 elegiveis, 118 atrasados, 5.69% | local 2074, 118, 5.69% | OK
+ES: athena 1992 elegiveis, 214 atrasados, 10.74% | local 1992, 214, 10.74% | OK
+GO: athena 1950 elegiveis, 128 atrasados, 6.56% | local 1950, 128, 6.56% | OK
+MA: athena 713 elegiveis, 125 atrasados, 17.53% | local 713, 125, 17.53% | OK
+MG: athena 11319 elegiveis, 519 atrasados, 4.59% | local 11319, 519, 4.59% | OK
+MS: athena 701 elegiveis, 68 atrasados, 9.7% | local 701, 68, 9.7% | OK
+MT: athena 885 elegiveis, 53 atrasados, 5.99% | local 885, 53, 5.99% | OK
+PA: athena 942 elegiveis, 106 atrasados, 11.25% | local 942, 106, 11.25% | OK
+PB: athena 516 elegiveis, 54 atrasados, 10.47% | local 516, 54, 10.47% | OK
+PE: athena 1587 elegiveis, 153 atrasados, 9.64% | local 1587, 153, 9.64% | OK
+PI: athena 475 elegiveis, 66 atrasados, 13.89% | local 475, 66, 13.89% | OK
+PR: athena 4903 elegiveis, 199 atrasados, 4.06% | local 4903, 199, 4.06% | OK
+RJ: athena 12310 elegiveis, 1495 atrasados, 12.14% | local 12310, 1495, 12.14% | OK
+RN: athena 470 elegiveis, 44 atrasados, 9.36% | local 470, 44, 9.36% | OK
+RO: athena 243 elegiveis, 7 atrasados, 2.88% | local 243, 7, 2.88% | OK
+RR: athena 40 elegiveis, 5 atrasados, 12.5% | local 40, 5, 12.5% | OK
+RS: athena 5327 elegiveis, 325 atrasados, 6.1% | local 5327, 325, 6.1% | OK
+SC: athena 3537 elegiveis, 291 atrasados, 8.23% | local 3537, 291, 8.23% | OK
+SE: athena 332 elegiveis, 51 atrasados, 15.36% | local 332, 51, 15.36% | OK
+SP: athena 40399 elegiveis, 1817 atrasados, 4.5% | local 40399, 1817, 4.5% | OK
+TO: athena 274 elegiveis, 27 atrasados, 9.85% | local 274, 27, 9.85% | OK
+UFs no Athena: 27 | UFs no calculo local: 27 | divergencias: 0
+# ---- fim (UTC): 2026-10-03T00:51:34Z | codigo de saida: 0

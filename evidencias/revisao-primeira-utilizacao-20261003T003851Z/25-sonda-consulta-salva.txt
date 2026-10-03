@@ -1,0 +1,9 @@
+# objetivo: Pergunta registrada no IaC: a consulta salva no workgroup e identica ao pergunta.sql
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; ID=$(terraform -chdir=parte-1 output -raw consulta_salva_id); aws athena get-named-query --named-query-id $ID --query NamedQuery.QueryString --output text | tr -d "\r" > /tmp/nq.sql; if diff <(sed -e "\$a\\" /tmp/nq.sql) <(sed -e "\$a\\" parte-1/consulta/pergunta.sql) >/dev/null; then echo "consulta salva $ID identica ao pergunta.sql"; else echo "DIFERENTE"; diff /tmp/nq.sql parte-1/consulta/pergunta.sql; fi
+# inicio (UTC): 2026-10-03T00:49:08Z
+# ---- saida ----
+DIFERENTE
+16d15
+< 
+# ---- fim (UTC): 2026-10-03T00:49:15Z | codigo de saida: 1

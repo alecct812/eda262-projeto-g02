@@ -1,0 +1,13 @@
+# objetivo: DECISAO 09 (carga via aws_s3_object): objetos no S3 batem com os arquivos locais (tamanho e MD5/ETag)
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; for par in "eda262-g02-lake-raw olist/orders/olist_orders_dataset.csv parte-1/dados/raw/olist_orders_dataset.csv" "eda262-g02-lake-raw olist/customers/olist_customers_dataset.csv parte-1/dados/raw/olist_customers_dataset.csv" "eda262-g02-lake-trusted pedidos_entrega/pedidos_entrega.csv parte-1/dados/trusted/pedidos_entrega.csv"; do set -- $par; r=$(aws s3api head-object --bucket $1 --key $2 --query "[ContentLength, ETag]" --output text | tr -d "\""); l="$(stat -c %s $3) $(md5sum $3 | cut -d" " -f1)"; echo "$1/$2 | S3: $r | local: $l"; done; echo "== listagem completa dos buckets de dados:"; aws s3 ls s3://eda262-g02-lake-raw --recursive; aws s3 ls s3://eda262-g02-lake-trusted --recursive
+# inicio (UTC): 2026-10-03T00:48:51Z
+# ---- saida ----
+eda262-g02-lake-raw/olist/orders/olist_orders_dataset.csv | S3: 17654914	470aaf9311051e4ee9e975de76d2add2-4 | local: 17654914 8bd60e55c1ca229d9f70b62f3e72f22c
+eda262-g02-lake-raw/olist/customers/olist_customers_dataset.csv | S3: 9033957	61d276d8281c0bdcb834466103b42590-2 | local: 9033957 8a2c4244856aab4bde3b8ed81f8ca251
+eda262-g02-lake-trusted/pedidos_entrega/pedidos_entrega.csv | S3: 11167989	49876b786f8a34dce655fcbb6da46081-3 | local: 11167989 0b092ec644759fadc50f3ec3d00891ed
+== listagem completa dos buckets de dados:
+2026-10-02 21:45:51    9033957 olist/customers/olist_customers_dataset.csv
+2026-10-02 21:45:51   17654914 olist/orders/olist_orders_dataset.csv
+2026-10-02 21:45:51   11167989 pedidos_entrega/pedidos_entrega.csv
+# ---- fim (UTC): 2026-10-03T00:49:08Z | codigo de saida: 0

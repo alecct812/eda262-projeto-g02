@@ -1,0 +1,8 @@
+# objetivo: README, passo 0: credenciais do grupo exportadas (AWS_PROFILE) e regiao us-east-1
+# diretorio: eda262-g02-revisao
+# comando: echo "AWS_PROFILE=$AWS_PROFILE AWS_REGION=$AWS_REGION"; aws sts get-caller-identity --query Arn --output text
+# inicio (UTC): 2026-10-03T00:39:21Z
+# ---- saida ----
+AWS_PROFILE=eda AWS_REGION=us-east-1
+arn:aws:iam::<ACCOUNT_ID>:user/eda-grupo02
+# ---- fim (UTC): 2026-10-03T00:39:26Z | codigo de saida: 0

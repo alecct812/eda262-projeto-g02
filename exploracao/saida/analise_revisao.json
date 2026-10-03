@@ -1,0 +1,509 @@
+{
+  "periodo": [
+    "2017-01-01 00:00:00",
+    "2018-09-01 00:00:00"
+  ],
+  "data_de_corte_da_base": "2018-10-17",
+  "pedidos_no_periodo": 99092,
+  "elegiveis": 96203,
+  "atrasados": 6531,
+  "nao_entregues_com_prazo_vencido_por_status": {
+    "shipped": 1097,
+    "unavailable": 602,
+    "canceled": 580,
+    "processing": 299,
+    "invoiced": 296,
+    "delivered": 8,
+    "created": 5,
+    "approved": 2
+  },
+  "ranking_por_atrasados": [
+    "SP",
+    "RJ",
+    "MG",
+    "BA",
+    "RS"
+  ],
+  "ranking_por_taxa": [
+    "AL",
+    "MA",
+    "SE",
+    "PI",
+    "CE"
+  ],
+  "ranking_por_taxa_com_vencidos_logistica": [
+    "AL",
+    "MA",
+    "RR",
+    "SE",
+    "CE"
+  ],
+  "ranking_por_taxa_com_todos_vencidos": [
+    "AL",
+    "MA",
+    "RR",
+    "SE",
+    "CE"
+  ],
+  "por_uf": {
+    "AC": {
+      "elegiveis": 80,
+      "atrasados": 3,
+      "taxa_pct": 3.75,
+      "ic95_wilson_pct": [
+        1.28,
+        10.45
+      ],
+      "prazo_prometido_medio_dias": 41.7,
+      "prazo_real_medio_dias": 21.0,
+      "prazo_real_mediano_dias": 18,
+      "vencidos_sem_entrega_logistica": 1,
+      "taxa_com_vencidos_logistica_pct": 4.94,
+      "vencidos_sem_entrega_todos": 1,
+      "taxa_com_todos_vencidos_pct": 4.94,
+      "atrasados_em_2017_11_2018_02_2018_03": 1
+    },
+    "AL": {
+      "elegiveis": 396,
+      "atrasados": 85,
+      "taxa_pct": 21.46,
+      "ic95_wilson_pct": [
+        17.71,
+        25.77
+      ],
+      "prazo_prometido_medio_dias": 33.1,
+      "prazo_real_medio_dias": 24.5,
+      "prazo_real_mediano_dias": 22,
+      "vencidos_sem_entrega_logistica": 13,
+      "taxa_com_vencidos_logistica_pct": 23.96,
+      "vencidos_sem_entrega_todos": 15,
+      "taxa_com_todos_vencidos_pct": 24.33,
+      "atrasados_em_2017_11_2018_02_2018_03": 24
+    },
+    "AM": {
+      "elegiveis": 145,
+      "atrasados": 4,
+      "taxa_pct": 2.76,
+      "ic95_wilson_pct": [
+        1.08,
+        6.88
+      ],
+      "prazo_prometido_medio_dias": 45.9,
+      "prazo_real_medio_dias": 26.4,
+      "prazo_real_mediano_dias": 26,
+      "vencidos_sem_entrega_logistica": 2,
+      "taxa_com_vencidos_logistica_pct": 4.08,
+      "vencidos_sem_entrega_todos": 3,
+      "taxa_com_todos_vencidos_pct": 4.73,
+      "atrasados_em_2017_11_2018_02_2018_03": 3
+    },
+    "AP": {
+      "elegiveis": 67,
+      "atrasados": 2,
+      "taxa_pct": 2.99,
+      "ic95_wilson_pct": [
+        0.82,
+        10.25
+      ],
+      "prazo_prometido_medio_dias": 46.9,
+      "prazo_real_medio_dias": 27.2,
+      "prazo_real_mediano_dias": 25,
+      "vencidos_sem_entrega_logistica": 1,
+      "taxa_com_vencidos_logistica_pct": 4.41,
+      "vencidos_sem_entrega_todos": 1,
+      "taxa_com_todos_vencidos_pct": 4.41,
+      "atrasados_em_2017_11_2018_02_2018_03": 0
+    },
+    "BA": {
+      "elegiveis": 3253,
+      "atrasados": 396,
+      "taxa_pct": 12.17,
+      "ic95_wilson_pct": [
+        11.09,
+        13.34
+      ],
+      "prazo_prometido_medio_dias": 30.0,
+      "prazo_real_medio_dias": 19.3,
+      "prazo_real_mediano_dias": 17,
+      "vencidos_sem_entrega_logistica": 87,
+      "taxa_com_vencidos_logistica_pct": 14.46,
+      "vencidos_sem_entrega_todos": 123,
+      "taxa_com_todos_vencidos_pct": 15.37,
+      "atrasados_em_2017_11_2018_02_2018_03": 150
+    },
+    "CE": {
+      "elegiveis": 1273,
+      "atrasados": 176,
+      "taxa_pct": 13.83,
+      "ic95_wilson_pct": [
+        12.04,
+        15.83
+      ],
+      "prazo_prometido_medio_dias": 31.8,
+      "prazo_real_medio_dias": 21.2,
+      "prazo_real_mediano_dias": 18,
+      "vencidos_sem_entrega_logistica": 43,
+      "taxa_com_vencidos_logistica_pct": 16.64,
+      "vencidos_sem_entrega_todos": 55,
+      "taxa_com_todos_vencidos_pct": 17.39,
+      "atrasados_em_2017_11_2018_02_2018_03": 107
+    },
+    "DF": {
+      "elegiveis": 2074,
+      "atrasados": 118,
+      "taxa_pct": 5.69,
+      "ic95_wilson_pct": [
+        4.77,
+        6.77
+      ],
+      "prazo_prometido_medio_dias": 24.8,
+      "prazo_real_medio_dias": 12.9,
+      "prazo_real_mediano_dias": 11,
+      "vencidos_sem_entrega_logistica": 41,
+      "taxa_com_vencidos_logistica_pct": 7.52,
+      "vencidos_sem_entrega_todos": 60,
+      "taxa_com_todos_vencidos_pct": 8.34,
+      "atrasados_em_2017_11_2018_02_2018_03": 65
+    },
+    "ES": {
+      "elegiveis": 1992,
+      "atrasados": 214,
+      "taxa_pct": 10.74,
+      "ic95_wilson_pct": [
+        9.46,
+        12.18
+      ],
+      "prazo_prometido_medio_dias": 26.2,
+      "prazo_real_medio_dias": 15.7,
+      "prazo_real_mediano_dias": 14,
+      "vencidos_sem_entrega_logistica": 22,
+      "taxa_com_vencidos_logistica_pct": 11.72,
+      "vencidos_sem_entrega_todos": 37,
+      "taxa_com_todos_vencidos_pct": 12.37,
+      "atrasados_em_2017_11_2018_02_2018_03": 107
+    },
+    "GO": {
+      "elegiveis": 1950,
+      "atrasados": 128,
+      "taxa_pct": 6.56,
+      "ic95_wilson_pct": [
+        5.55,
+        7.75
+      ],
+      "prazo_prometido_medio_dias": 27.6,
+      "prazo_real_medio_dias": 15.5,
+      "prazo_real_mediano_dias": 14,
+      "vencidos_sem_entrega_logistica": 40,
+      "taxa_com_vencidos_logistica_pct": 8.44,
+      "vencidos_sem_entrega_todos": 61,
+      "taxa_com_todos_vencidos_pct": 9.4,
+      "atrasados_em_2017_11_2018_02_2018_03": 71
+    },
+    "MA": {
+      "elegiveis": 713,
+      "atrasados": 125,
+      "taxa_pct": 17.53,
+      "ic95_wilson_pct": [
+        14.92,
+        20.49
+      ],
+      "prazo_prometido_medio_dias": 30.9,
+      "prazo_real_medio_dias": 21.5,
+      "prazo_real_mediano_dias": 19,
+      "vencidos_sem_entrega_logistica": 19,
+      "taxa_com_vencidos_logistica_pct": 19.67,
+      "vencidos_sem_entrega_todos": 30,
+      "taxa_com_todos_vencidos_pct": 20.86,
+      "atrasados_em_2017_11_2018_02_2018_03": 71
+    },
+    "MG": {
+      "elegiveis": 11319,
+      "atrasados": 519,
+      "taxa_pct": 4.59,
+      "ic95_wilson_pct": [
+        4.22,
+        4.99
+      ],
+      "prazo_prometido_medio_dias": 25.1,
+      "prazo_real_medio_dias": 11.9,
+      "prazo_real_mediano_dias": 10,
+      "vencidos_sem_entrega_logistica": 138,
+      "taxa_com_vencidos_logistica_pct": 5.73,
+      "vencidos_sem_entrega_todos": 272,
+      "taxa_com_todos_vencidos_pct": 6.82,
+      "atrasados_em_2017_11_2018_02_2018_03": 307
+    },
+    "MS": {
+      "elegiveis": 701,
+      "atrasados": 68,
+      "taxa_pct": 9.7,
+      "ic95_wilson_pct": [
+        7.72,
+        12.12
+      ],
+      "prazo_prometido_medio_dias": 26.6,
+      "prazo_real_medio_dias": 15.5,
+      "prazo_real_mediano_dias": 14,
+      "vencidos_sem_entrega_logistica": 7,
+      "taxa_com_vencidos_logistica_pct": 10.59,
+      "vencidos_sem_entrega_todos": 14,
+      "taxa_com_todos_vencidos_pct": 11.47,
+      "atrasados_em_2017_11_2018_02_2018_03": 40
+    },
+    "MT": {
+      "elegiveis": 885,
+      "atrasados": 53,
+      "taxa_pct": 5.99,
+      "ic95_wilson_pct": [
+        4.61,
+        7.75
+      ],
+      "prazo_prometido_medio_dias": 32.3,
+      "prazo_real_medio_dias": 18.0,
+      "prazo_real_mediano_dias": 16,
+      "vencidos_sem_entrega_logistica": 15,
+      "taxa_com_vencidos_logistica_pct": 7.56,
+      "vencidos_sem_entrega_todos": 19,
+      "taxa_com_todos_vencidos_pct": 7.96,
+      "atrasados_em_2017_11_2018_02_2018_03": 30
+    },
+    "PA": {
+      "elegiveis": 942,
+      "atrasados": 106,
+      "taxa_pct": 11.25,
+      "ic95_wilson_pct": [
+        9.39,
+        13.43
+      ],
+      "prazo_prometido_medio_dias": 37.7,
+      "prazo_real_medio_dias": 23.7,
+      "prazo_real_mediano_dias": 21,
+      "vencidos_sem_entrega_logistica": 23,
+      "taxa_com_vencidos_logistica_pct": 13.37,
+      "vencidos_sem_entrega_todos": 29,
+      "taxa_com_todos_vencidos_pct": 13.9,
+      "atrasados_em_2017_11_2018_02_2018_03": 51
+    },
+    "PB": {
+      "elegiveis": 516,
+      "atrasados": 54,
+      "taxa_pct": 10.47,
+      "ic95_wilson_pct": [
+        8.11,
+        13.4
+      ],
+      "prazo_prometido_medio_dias": 33.6,
+      "prazo_real_medio_dias": 20.4,
+      "prazo_real_mediano_dias": 18,
+      "vencidos_sem_entrega_logistica": 14,
+      "taxa_com_vencidos_logistica_pct": 12.83,
+      "vencidos_sem_entrega_todos": 19,
+      "taxa_com_todos_vencidos_pct": 13.64,
+      "atrasados_em_2017_11_2018_02_2018_03": 13
+    },
+    "PE": {
+      "elegiveis": 1587,
+      "atrasados": 153,
+      "taxa_pct": 9.64,
+      "ic95_wilson_pct": [
+        8.28,
+        11.19
+      ],
+      "prazo_prometido_medio_dias": 31.6,
+      "prazo_real_medio_dias": 18.4,
+      "prazo_real_mediano_dias": 16,
+      "vencidos_sem_entrega_logistica": 49,
+      "taxa_com_vencidos_logistica_pct": 12.35,
+      "vencidos_sem_entrega_todos": 58,
+      "taxa_com_todos_vencidos_pct": 12.83,
+      "atrasados_em_2017_11_2018_02_2018_03": 51
+    },
+    "PI": {
+      "elegiveis": 475,
+      "atrasados": 66,
+      "taxa_pct": 13.89,
+      "ic95_wilson_pct": [
+        11.07,
+        17.3
+      ],
+      "prazo_prometido_medio_dias": 30.6,
+      "prazo_real_medio_dias": 19.4,
+      "prazo_real_mediano_dias": 16,
+      "vencidos_sem_entrega_logistica": 14,
+      "taxa_com_vencidos_logistica_pct": 16.36,
+      "vencidos_sem_entrega_todos": 18,
+      "taxa_com_todos_vencidos_pct": 17.04,
+      "atrasados_em_2017_11_2018_02_2018_03": 32
+    },
+    "PR": {
+      "elegiveis": 4903,
+      "atrasados": 199,
+      "taxa_pct": 4.06,
+      "ic95_wilson_pct": [
+        3.54,
+        4.65
+      ],
+      "prazo_prometido_medio_dias": 25.1,
+      "prazo_real_medio_dias": 11.9,
+      "prazo_real_mediano_dias": 10,
+      "vencidos_sem_entrega_logistica": 60,
+      "taxa_com_vencidos_logistica_pct": 5.22,
+      "vencidos_sem_entrega_todos": 122,
+      "taxa_com_todos_vencidos_pct": 6.39,
+      "atrasados_em_2017_11_2018_02_2018_03": 111
+    },
+    "RJ": {
+      "elegiveis": 12310,
+      "atrasados": 1495,
+      "taxa_pct": 12.14,
+      "ic95_wilson_pct": [
+        11.58,
+        12.73
+      ],
+      "prazo_prometido_medio_dias": 26.9,
+      "prazo_real_medio_dias": 15.2,
+      "prazo_real_mediano_dias": 12,
+      "vencidos_sem_entrega_logistica": 345,
+      "taxa_com_vencidos_logistica_pct": 14.54,
+      "vencidos_sem_entrega_todos": 482,
+      "taxa_com_todos_vencidos_pct": 15.45,
+      "atrasados_em_2017_11_2018_02_2018_03": 860
+    },
+    "RN": {
+      "elegiveis": 470,
+      "atrasados": 44,
+      "taxa_pct": 9.36,
+      "ic95_wilson_pct": [
+        7.05,
+        12.33
+      ],
+      "prazo_prometido_medio_dias": 32.6,
+      "prazo_real_medio_dias": 19.2,
+      "prazo_real_mediano_dias": 16,
+      "vencidos_sem_entrega_logistica": 8,
+      "taxa_com_vencidos_logistica_pct": 10.88,
+      "vencidos_sem_entrega_todos": 11,
+      "taxa_com_todos_vencidos_pct": 11.43,
+      "atrasados_em_2017_11_2018_02_2018_03": 17
+    },
+    "RO": {
+      "elegiveis": 243,
+      "atrasados": 7,
+      "taxa_pct": 2.88,
+      "ic95_wilson_pct": [
+        1.4,
+        5.83
+      ],
+      "prazo_prometido_medio_dias": 39.4,
+      "prazo_real_medio_dias": 19.3,
+      "prazo_real_mediano_dias": 18,
+      "vencidos_sem_entrega_logistica": 3,
+      "taxa_com_vencidos_logistica_pct": 4.07,
+      "vencidos_sem_entrega_todos": 10,
+      "taxa_com_todos_vencidos_pct": 6.72,
+      "atrasados_em_2017_11_2018_02_2018_03": 3
+    },
+    "RR": {
+      "elegiveis": 40,
+      "atrasados": 5,
+      "taxa_pct": 12.5,
+      "ic95_wilson_pct": [
+        5.46,
+        26.11
+      ],
+      "prazo_prometido_medio_dias": 46.1,
+      "prazo_real_medio_dias": 29.9,
+      "prazo_real_mediano_dias": 25,
+      "vencidos_sem_entrega_logistica": 3,
+      "taxa_com_vencidos_logistica_pct": 18.6,
+      "vencidos_sem_entrega_todos": 4,
+      "taxa_com_todos_vencidos_pct": 20.45,
+      "atrasados_em_2017_11_2018_02_2018_03": 2
+    },
+    "RS": {
+      "elegiveis": 5327,
+      "atrasados": 325,
+      "taxa_pct": 6.1,
+      "ic95_wilson_pct": [
+        5.49,
+        6.78
+      ],
+      "prazo_prometido_medio_dias": 29.1,
+      "prazo_real_medio_dias": 15.2,
+      "prazo_real_mediano_dias": 13,
+      "vencidos_sem_entrega_logistica": 68,
+      "taxa_com_vencidos_logistica_pct": 7.28,
+      "vencidos_sem_entrega_todos": 114,
+      "taxa_com_todos_vencidos_pct": 8.07,
+      "atrasados_em_2017_11_2018_02_2018_03": 178
+    },
+    "SC": {
+      "elegiveis": 3537,
+      "atrasados": 291,
+      "taxa_pct": 8.23,
+      "ic95_wilson_pct": [
+        7.37,
+        9.18
+      ],
+      "prazo_prometido_medio_dias": 26.3,
+      "prazo_real_medio_dias": 14.9,
+      "prazo_real_mediano_dias": 13,
+      "vencidos_sem_entrega_logistica": 53,
+      "taxa_com_vencidos_logistica_pct": 9.58,
+      "vencidos_sem_entrega_todos": 88,
+      "taxa_com_todos_vencidos_pct": 10.46,
+      "atrasados_em_2017_11_2018_02_2018_03": 152
+    },
+    "SE": {
+      "elegiveis": 332,
+      "atrasados": 51,
+      "taxa_pct": 15.36,
+      "ic95_wilson_pct": [
+        11.88,
+        19.63
+      ],
+      "prazo_prometido_medio_dias": 31.2,
+      "prazo_real_medio_dias": 21.4,
+      "prazo_real_mediano_dias": 18,
+      "vencidos_sem_entrega_logistica": 10,
+      "taxa_com_vencidos_logistica_pct": 17.84,
+      "vencidos_sem_entrega_todos": 15,
+      "taxa_com_todos_vencidos_pct": 19.02,
+      "atrasados_em_2017_11_2018_02_2018_03": 20
+    },
+    "SP": {
+      "elegiveis": 40399,
+      "atrasados": 1817,
+      "taxa_pct": 4.5,
+      "ic95_wilson_pct": [
+        4.3,
+        4.7
+      ],
+      "prazo_prometido_medio_dias": 19.7,
+      "prazo_real_medio_dias": 8.7,
+      "prazo_real_mediano_dias": 7,
+      "vencidos_sem_entrega_logistica": 616,
+      "taxa_com_vencidos_logistica_pct": 5.93,
+      "vencidos_sem_entrega_todos": 1222,
+      "taxa_com_todos_vencidos_pct": 7.3,
+      "atrasados_em_2017_11_2018_02_2018_03": 675
+    },
+    "TO": {
+      "elegiveis": 274,
+      "atrasados": 27,
+      "taxa_pct": 9.85,
+      "ic95_wilson_pct": [
+        6.86,
+        13.96
+      ],
+      "prazo_prometido_medio_dias": 29.7,
+      "prazo_real_medio_dias": 17.6,
+      "prazo_real_mediano_dias": 16,
+      "vencidos_sem_entrega_logistica": 4,
+      "taxa_com_vencidos_logistica_pct": 11.15,
+      "vencidos_sem_entrega_todos": 6,
+      "taxa_com_todos_vencidos_pct": 11.79,
+      "atrasados_em_2017_11_2018_02_2018_03": 17
+    }
+  }
+}

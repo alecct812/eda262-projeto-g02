@@ -1,0 +1,42 @@
+# objetivo: DECISOES 03 e 04 recalculadas no proprio Athena a partir das colunas de data: flag persistida x regra por dia x comparacao por horario; exclusoes por motivo
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; B=eda262_g02_entregas_ecommerce; W=eda262-g02-wg; Q=$(athena_executa "SELECT count(*) AS elegiveis, count_if(atrasado) AS atrasado_flag, count_if(date(data_hora_entrega) > data_prevista_entrega) AS atrasado_regra_dia, count_if(data_hora_entrega > CAST(data_prevista_entrega AS timestamp)) AS atrasado_se_comparar_horario, count_if(dias_atraso <> date_diff(\x27day\x27, data_prevista_entrega, date(data_hora_entrega))) AS dias_inconsistentes FROM pedidos_entrega WHERE elegivel" $B $W); echo "execucao $Q: $(athena_espera $Q), bytes $(athena_bytes $Q)"; athena_resultado_csv $Q; Q=$(athena_executa "SELECT coalesce(motivo_exclusao, \x27(elegivel)\x27) AS motivo, count(*) AS pedidos FROM pedidos_entrega GROUP BY 1 ORDER BY 2 DESC" $B $W); echo "execucao $Q: $(athena_espera $Q), bytes $(athena_bytes $Q)"; athena_resultado_csv $Q
+# inicio (UTC): 2026-10-03T00:50:00Z
+# ---- saida ----
+
+aws: [ERROR]: An error occurred (InvalidRequestException) when calling the StartQueryExecution operation: line 1:287: mismatched input '\'. Expecting: ')', '*', 'ALL', 'DISTINCT', 'ORDER', <expression>
+
+Additional error details:
+AthenaErrorCode: MALFORMED_QUERY
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+execucao : , bytes 
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+
+aws: [ERROR]: An error occurred (ParamValidation): usage: aws s3 cp <LocalPath> <S3Uri> or <S3Uri> <LocalPath> or <S3Uri> <S3Uri>
+Error: Invalid argument type
+
+aws: [ERROR]: An error occurred (InvalidRequestException) when calling the StartQueryExecution operation: line 1:34: mismatched input '\'. Expecting: <expression>
+
+Additional error details:
+AthenaErrorCode: MALFORMED_QUERY
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+execucao : , bytes 
+
+aws: [ERROR]: An error occurred (ParamValidation): Parameter validation failed:
+Invalid length for parameter QueryExecutionId, value: 0, valid min length: 1
+
+aws: [ERROR]: An error occurred (ParamValidation): usage: aws s3 cp <LocalPath> <S3Uri> or <S3Uri> <LocalPath> or <S3Uri> <S3Uri>
+Error: Invalid argument type
+# ---- fim (UTC): 2026-10-03T00:50:19Z | codigo de saida: 0

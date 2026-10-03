@@ -1,0 +1,26 @@
+# objetivo: Guia 4.1 (workgroup do Athena) e DECISAO 08 (teto): configuracao real do workgroup
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; aws athena get-work-group --work-group eda262-g02-wg --query "WorkGroup.{estado:State,config:Configuration}" --output json
+# inicio (UTC): 2026-10-03T00:48:26Z
+# ---- saida ----
+{
+    "estado": "ENABLED",
+    "config": {
+        "ResultConfiguration": {
+            "OutputLocation": "s3://eda262-g02-athena-results/resultados/",
+            "EncryptionConfiguration": {
+                "EncryptionOption": "SSE_S3"
+            }
+        },
+        "EnforceWorkGroupConfiguration": true,
+        "PublishCloudWatchMetricsEnabled": false,
+        "BytesScannedCutoffPerQuery": 52428800,
+        "RequesterPaysEnabled": false,
+        "EngineVersion": {
+            "SelectedEngineVersion": "AUTO",
+            "EffectiveEngineVersion": "Athena engine version 3"
+        },
+        "EnableMinimumEncryptionConfiguration": false
+    }
+}
+# ---- fim (UTC): 2026-10-03T00:48:33Z | codigo de saida: 0

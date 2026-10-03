@@ -1,0 +1,8 @@
+# objetivo: DECISAO 09: o objeto trusted no S3 tem exatamente os bytes do arquivo versionado (SHA-256 do download)
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; aws s3 cp s3://eda262-g02-lake-trusted/pedidos_entrega/pedidos_entrega.csv /tmp/trusted_s3.csv --only-show-errors; sha256sum /tmp/trusted_s3.csv parte-1/dados/trusted/pedidos_entrega.csv; rm -f /tmp/trusted_s3.csv
+# inicio (UTC): 2026-10-03T00:49:54Z
+# ---- saida ----
+de2bb699c6668e65622028d27b09ae5bc32fc14e92a42bbe0db5e9f6c751b91b */tmp/trusted_s3.csv
+de2bb699c6668e65622028d27b09ae5bc32fc14e92a42bbe0db5e9f6c751b91b *parte-1/dados/trusted/pedidos_entrega.csv
+# ---- fim (UTC): 2026-10-03T00:49:59Z | codigo de saida: 0

@@ -1,0 +1,19 @@
+# objetivo: Registrar a versao exata revisada e confirmar que o clone esta limpo (isolamento)
+# diretorio: eda262-g02-revisao
+# comando: git log --oneline -1; git status --short; echo "arquivos versionados: $(git ls-files | wc -l)"; ls -a
+# inicio (UTC): 2026-10-03T00:39:16Z
+# ---- saida ----
+7777c3c Evidencia regravada apos as correcoes da revisao: ciclo do zero em 14 etapas
+arquivos versionados: 53
+.
+..
+.git
+.gitattributes
+.gitignore
+DECISOES.md
+README.md
+evidencias
+exploracao
+parte-1
+verificacao
+# ---- fim (UTC): 2026-10-03T00:39:17Z | codigo de saida: 0

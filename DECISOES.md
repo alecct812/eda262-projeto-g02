@@ -45,7 +45,10 @@ dentro do dia, que a origem não tem para a previsão.
 > `prevista_com_hora_diferente_de_zero`, e a chave não aparece no manifesto porque houve 0). Pela regra de dias, 6.534
 > atrasados entre 96.470 elegíveis, ou 6,77% (`manifesto.json`). Comparando horários seriam
 > 7.826 (`perfil_olist.json`, `atrasados_se_comparar_timestamp`): 1.292 entregas no dia prometido
-> virariam falsos atrasos, inflando a taxa em 1,34 ponto percentual.
+> virariam falsos atrasos, inflando a taxa em 1,34 ponto percentual. Recontado no próprio Athena
+> sobre a trusted: 96.470 elegíveis, 6.534 pela coluna `atrasado` e também pela regra por dia, e
+> 7.826 comparando horários
+> (`evidencias/revisao-primeira-utilizacao-20261003T003851Z/29-sonda-regra-atraso-athena-corrigida.txt`).
 
 ## DECISÃO 04: Limpeza da camada bruta para a trusted e elegibilidade
 
@@ -63,7 +66,12 @@ denominador: a taxa mede atraso de entrega, não falha de atendimento.
 > coleta, 14 entregues sem aprovação, 2 entregues sem coleta e 6 cancelados com data de entrega.
 > Duplicatas: 0 (nenhuma deduplicação inventada). No Athena,
 > `count_if(motivo_exclusao IS NULL) = 96470`, confirmando que o campo vazio vira nulo (critério
-> 4 do `verifica.sh` em `evidencias/execucao-20261002T001732Z/11-verificacao.txt`).
+> 4 do `verifica.sh` em `evidencias/execucao-20261002T001732Z/11-verificacao.txt`). Custo
+> medido da exclusão: no período da pergunta, 1.699 pedidos com logística em aberto (1.097
+> `shipped`, 299 `processing`, 296 `invoiced`, 5 `created` e 2 `approved`) ficaram com o prazo
+> vencido até 17/10/2018 sem entrega. Contá-los como promessas descumpridas elevaria a taxa de SP
+> de 4,50% para 5,93% e a do RJ de 12,14% para 14,54%, sem mudar o ranking por quantidade (SP, RJ,
+> MG, BA, RS) (`exploracao/saida/analise_revisao.json`).
 
 ## DECISÃO 05: Período da pergunta de 2017-01 a 2018-08
 

@@ -1,0 +1,12 @@
+# objetivo: Seguranca e destroy: bloqueio publico dos 4 buckets; versionamento e criptografia do bucket de state
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; for b in eda262-g02-lake-raw eda262-g02-lake-trusted eda262-g02-athena-results eda262-g02-tfstate; do echo "$b: $(aws s3api get-public-access-block --bucket $b --query "PublicAccessBlockConfiguration.[BlockPublicAcls,BlockPublicPolicy,IgnorePublicAcls,RestrictPublicBuckets]" --output text)"; done; echo "state versionamento: $(aws s3api get-bucket-versioning --bucket eda262-g02-tfstate --query Status --output text)"; echo "state SSE: $(aws s3api get-bucket-encryption --bucket eda262-g02-tfstate --query "ServerSideEncryptionConfiguration.Rules[0].ApplyServerSideEncryptionByDefault.SSEAlgorithm" --output text)"
+# inicio (UTC): 2026-10-03T00:48:33Z
+# ---- saida ----
+eda262-g02-lake-raw: True	True	True	True
+eda262-g02-lake-trusted: True	True	True	True
+eda262-g02-athena-results: True	True	True	True
+eda262-g02-tfstate: True	True	True	True
+state versionamento: Enabled
+state SSE: AES256
+# ---- fim (UTC): 2026-10-03T00:48:51Z | codigo de saida: 0

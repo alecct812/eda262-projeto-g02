@@ -1,0 +1,15 @@
+# objetivo: README, secao Pre-requisitos: Terraform >= 1.6, AWS CLI v2, bash, Python >= 3.10
+# diretorio: eda262-g02-revisao
+# comando: terraform version; aws --version; python --version; bash --version | head -n 1; uname -s
+# inicio (UTC): 2026-10-03T00:39:18Z
+# ---- saida ----
+Terraform v1.15.8
+on windows_amd64
+
+Your version of Terraform is out of date! The latest version
+is 1.16.4. You can update by downloading from https://developer.hashicorp.com/terraform/install
+aws-cli/2.34.54 Python/3.14.5 Windows/11 exe/AMD64
+Python 3.13.15
+GNU bash, version 5.2.37(1)-release (x86_64-pc-msys)
+MINGW64_NT-10.0-26200
+# ---- fim (UTC): 2026-10-03T00:39:21Z | codigo de saida: 0

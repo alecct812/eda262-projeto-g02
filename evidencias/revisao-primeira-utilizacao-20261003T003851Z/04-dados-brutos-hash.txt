@@ -1,0 +1,10 @@
+# objetivo: Guia 3 (dados do cenario): conferir que os CSVs brutos versionados sao os originais (hashes do FONTE.md)
+# diretorio: eda262-g02-revisao
+# comando: cd parte-1/dados/raw && grep -oE "[0-9a-f]{64}" FONTE.md > /tmp/esperado.txt; sha256sum olist_orders_dataset.csv olist_customers_dataset.csv | tee /tmp/obtido.txt; paste -d" " <(cut -d" " -f1 /tmp/obtido.txt) /tmp/esperado.txt | awk "{print (\$1==\$2 ? \"OK \" : \"DIFERENTE \") \$1}"
+# inicio (UTC): 2026-10-03T00:39:27Z
+# ---- saida ----
+8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf *olist_orders_dataset.csv
+983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2 *olist_customers_dataset.csv
+OK 8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf
+OK 983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2
+# ---- fim (UTC): 2026-10-03T00:39:28Z | codigo de saida: 0

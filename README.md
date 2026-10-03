@@ -37,7 +37,7 @@ S3 eda262-g02-lake-raw                          S3 eda262-g02-lake-trusted
 | Bucket bruto | `eda262-g02-lake-raw` (CSVs originais) | módulo `lake` |
 | Bucket trusted | `eda262-g02-lake-trusted` (`pedidos_entrega/pedidos_entrega.csv`) | módulo `lake` |
 | Bucket de resultados | `eda262-g02-athena-results` | módulo `lake` |
-| Glue database | `eda262_g02_entregas_ecommerce` | módulo `lake` |
+| Glue database | `eda262_g02_entregas_ecommerce` (underscore no lugar do hífen do prefixo, porque nomes com hífen exigem aspas no SQL do Athena) | módulo `lake` |
 | Glue table | `pedidos_entrega` (10 colunas, LazySimpleSerDe) | módulo `lake` |
 | Athena workgroup | `eda262-g02-wg` (configuração imposta, teto de 50 MiB por consulta) | módulo `lake` |
 | Consulta salva | `eda262-g02-pergunta-atrasos-uf` | módulo `lake` |
@@ -52,7 +52,8 @@ não aceitam tags na API da AWS.
 - AWS CLI v2 e bash (no Windows, Git Bash).
 - Credenciais do grupo exportadas no terminal, por exemplo `export AWS_PROFILE=<perfil do grupo>`.
   O código não fixa perfil nem ID de conta: funciona na conta de quem executa.
-- Python >= 3.10, apenas para regenerar a trusted ou rodar os testes do preparo.
+- Python >= 3.10, apenas para regenerar a trusted ou rodar os testes do preparo. No Linux e no
+  macOS o comando costuma ser `python3` em vez de `python`.
 
 ## Região, conta e backend
 
@@ -68,7 +69,8 @@ não aceitam tags na API da AWS.
 
 ## Passo a passo do apply do zero
 
-Todos os comandos rodam na raiz do repositório.
+Todos os comandos rodam na raiz do repositório. Cada `apply` e `destroy` mostra o plano e pede
+confirmação: digite `yes`. Em automação, use `-auto-approve`, como faz `ciclo_completo.sh`.
 
 ```bash
 # 0. Credenciais e região
@@ -184,8 +186,8 @@ parte-1/
   consulta/             pergunta.sql e consulta.sh
   scripts/              comum.sh, ciclo_completo.sh e test_scripts.sh
 verificacao/verifica.sh
-evidencias/             execução registrada
-exploracao/             análise exploratória inicial (ferramenta auxiliar)
+evidencias/             execuções registradas (ciclo completo e revisão de primeira utilização)
+exploracao/             análise exploratória e análise complementar da revisão (ferramentas auxiliares)
 ```
 
 ## Dados e licença
@@ -205,14 +207,23 @@ python -m unittest discover -s parte-1/preparo -v
 ```
 
 O preparo é determinístico: a saída tem o mesmo SHA-256 registrado em
-`parte-1/dados/trusted/manifesto.json`. A análise em `exploracao/` precisa do download completo
-do Kaggle em `dataset/archive/` (fora do repositório).
+`parte-1/dados/trusted/manifesto.json`. A análise exploratória `exploracao/eda_olist.py` precisa
+do download completo do Kaggle em `dataset/archive/` (fora do repositório); com ele, regenera
+exatamente o `exploracao/saida/perfil_olist.json` versionado. A análise complementar da revisão
+(`exploracao/analise_revisao.py`) usa só a trusted versionada.
 
 ## Limitações
 
 - O dataset é um recorte histórico (compras de set/2016 a out/2018). A resposta descreve esse
   período, não o e-commerce atual.
 - O dado não traz transportadora nem causa do atraso: a análise indica onde investigar, não por quê.
+- A taxa mede promessa cumprida, não velocidade. AM, AP, RR, AC e RO recebem prazos prometidos
+  médios de 39 a 47 dias (SP: 19,7) e têm taxas de 2,8% a 12,5% mesmo com entregas médias de 19 a
+  30 dias (SP: 8,7).
+- Só pedidos entregues entram no indicador. No período, 1.699 pedidos com logística em aberto
+  (1.097 deles `shipped`) ficaram com o prazo vencido sem entrega e não são contados. Com eles,
+  as taxas sobem, mas o ranking por quantidade não muda (`exploracao/saida/analise_revisao.json`).
+- UFs com poucos pedidos têm taxa instável: RR tem 40 pedidos e intervalo de 95% de 5,5% a 26,1%.
 - O custo é calculado a partir dos bytes medidos, não lido da fatura.
 - Tabela Glue e consulta salva do Athena não aceitam tags.
 - Fora do escopo da Parte 1, conforme o guia: Parquet, particionamento, camadas e idempotência.

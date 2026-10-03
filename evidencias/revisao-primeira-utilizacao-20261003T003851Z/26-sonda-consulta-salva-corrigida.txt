@@ -1,0 +1,7 @@
+# objetivo: Refazer a etapa 25 sem o artefato de comparacao (a saida text da CLI acrescenta uma quebra de linha final): comparar o conteudo ignorando espacos em branco finais
+# diretorio: eda262-g02-revisao
+# comando: source parte-1/scripts/comum.sh; ID=$(terraform -chdir=parte-1 output -raw consulta_salva_id); aws athena get-named-query --named-query-id $ID --query NamedQuery.QueryString --output json | python -c "import json,sys; s=json.load(sys.stdin); f=open(\"parte-1/consulta/pergunta.sql\",encoding=\"utf-8\").read(); print(\"consulta salva\", \"\" if False else \"\", \"identica ao pergunta.sql:\", s.rstrip()==f.rstrip(), \"| caracteres:\", len(s), len(f))"
+# inicio (UTC): 2026-10-03T00:49:47Z
+# ---- saida ----
+consulta salva  identica ao pergunta.sql: True | caracteres: 781 781
+# ---- fim (UTC): 2026-10-03T00:49:53Z | codigo de saida: 0
