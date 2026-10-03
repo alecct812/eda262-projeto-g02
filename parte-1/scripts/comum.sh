@@ -20,8 +20,16 @@ PRECO_USD_POR_TB="5.00"   # Athena, us-east-1, aws.amazon.com/athena/pricing (co
 MINIMO_BYTES=10000000     # minimo cobrado por consulta: 10 MB (convencao decimal, ver DECISOES.md)
 
 exige_credenciais() {
+  local cmd
+  # type -P procura so no PATH (ignora a funcao aws definida acima).
+  for cmd in aws terraform; do
+    if ! type -P "$cmd" >/dev/null 2>&1; then
+      echo "ERRO: comando '$cmd' nao encontrado no PATH. Instale-o (ver Pre-requisitos no README)." >&2
+      return 1
+    fi
+  done
   if ! aws sts get-caller-identity --query Account --output text >/dev/null 2>&1; then
-    echo "ERRO: credenciais AWS ausentes ou invalidas. Exporte o perfil do grupo, por exemplo: export AWS_PROFILE=eda" >&2
+    echo "ERRO: credenciais AWS ausentes ou invalidas (ou sem acesso a rede). Exporte as credenciais do grupo: export AWS_PROFILE=<perfil do grupo>" >&2
     return 1
   fi
 }
@@ -84,7 +92,14 @@ custo_usd() {
   }'
 }
 
-# redige: troca o ID da conta por <ACCOUNT_ID> (evidencias sao versionadas).
+# redige: troca o ID da conta por <ACCOUNT_ID> (evidencias sao versionadas) e remove codigos de
+# cor ANSI que alguns comandos do Terraform imprimem, para as evidencias ficarem legiveis.
 redige() {
-  if [ -n "${CONTA_AWS:-}" ]; then sed "s/${CONTA_AWS}/<ACCOUNT_ID>/g"; else cat; fi
+  local esc
+  esc=$(printf '\033')
+  if [ -n "${CONTA_AWS:-}" ]; then
+    sed -e "s/${CONTA_AWS}/<ACCOUNT_ID>/g" -e "s/${esc}\[[0-9;]*m//g"
+  else
+    sed -e "s/${esc}\[[0-9;]*m//g"
+  fi
 }

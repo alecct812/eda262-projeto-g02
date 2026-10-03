@@ -10,8 +10,9 @@ CONTA_AWS=$(conta_aws)
 EVID_DIR="${EVID_DIR:-$RAIZ/evidencias/manual}"
 mkdir -p "$EVID_DIR"
 
-BANCO=$(tf_out banco_glue)
-WG=$(tf_out workgroup)
+# || true: sem state ou sem init, o terraform output falha e o set -e encerraria sem mensagem.
+BANCO=$(tf_out banco_glue || true)
+WG=$(tf_out workgroup || true)
 if [ -z "$BANCO" ] || [ -z "$WG" ]; then
   echo "ERRO: outputs do Terraform indisponiveis. Rode o apply no workspace av1 antes." >&2
   exit 1

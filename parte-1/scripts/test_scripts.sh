@@ -23,7 +23,8 @@ cat > "$TMP/bin/aws" <<'EOF'
 #!/usr/bin/env bash
 echo "AWS_REGION=${AWS_REGION:-} $*" >> "$FAKE_DIR/aws.log"
 case "$*" in
-  *get-caller-identity*) echo 123456789012 ;;
+  *get-caller-identity*) [ "${FAKE_SEM_CREDENCIAL:-0}" = 1 ] && { echo "InvalidClientTokenId" >&2; exit 255; }
+    echo 123456789012 ;;
   *start-query-execution*) printf '%s' "$*" > "$FAKE_DIR/ultima_query"; echo "qid-falso" ;;
   *QueryExecution.Status.State*) echo SUCCEEDED ;;
   *DataScannedInBytes*) echo 11167989 ;;
@@ -46,6 +47,8 @@ cat > "$TMP/bin/terraform" <<'EOF'
 echo "$*" >> "$FAKE_DIR/terraform.log"
 case "$*" in
   *"-chdir=parte-1 apply"*) [ "${FAKE_FALHA_APPLY:-0}" = 1 ] && { echo "Error: falha simulada no apply"; exit 1; } ;;
+  *"bootstrap apply"*) printf '\033[0m\033[1m\033[32mApply complete! Resources: 5 added\033[0m\n' ;;
+  *"output -raw"*) [ "${FAKE_SEM_OUTPUT:-0}" = 1 ] && { echo "Error: No outputs found" >&2; exit 1; } ;;&
   *"output -raw"*banco_glue*) printf 'eda262_g02_entregas_ecommerce' ;;
   *"output -raw"*tabela_glue*) printf 'pedidos_entrega' ;;
   *"output -raw"*workgroup*) printf 'eda262-g02-wg' ;;
@@ -91,6 +94,45 @@ if [ "$rc" -ne 0 ] && grep -q -- "-chdir=parte-1 destroy" "$TMP/terraform.log" &
   passa "apply com falha: ciclo sai com rc=$rc e destroi raiz e bootstrap"
 else
   falha "apply com falha: rc=$rc; destroys registrados: $(grep -c destroy "$TMP/terraform.log")"
+fi
+
+if grep -rq "$(printf '\033')" "$TMP/evid" 2>/dev/null; then
+  falha "evidencias do ciclo contem codigos de cor ANSI (ex.: $(grep -rl "$(printf '\033')" "$TMP/evid" | head -n 1))"
+else
+  passa "evidencias do ciclo sem codigos de cor ANSI"
+fi
+
+# 4. consulta.sh explica quando os outputs do Terraform nao existem (stack nao aplicada)
+saida=$(FAKE_SEM_OUTPUT=1 bash "$RAIZ/parte-1/consulta/consulta.sh" 2>&1)
+rc=$?
+if [ "$rc" -ne 0 ] && printf '%s\n' "$saida" | grep -q "outputs do Terraform indisponiveis"; then
+  passa "consulta.sh sem outputs: rc=$rc e mensagem explicativa"
+else
+  falha "consulta.sh sem outputs: rc=$rc, mensagem ausente (saida: $(printf '%s' "$saida" | head -c 120))"
+fi
+
+# 5. Mensagem de credenciais orienta pelo perfil do grupo, sem citar um perfil local fixo
+saida=$(FAKE_SEM_CREDENCIAL=1 bash "$RAIZ/verificacao/verifica.sh" 2>&1)
+rc=$?
+if [ "$rc" -ne 0 ] && printf '%s\n' "$saida" | grep -q "AWS_PROFILE=<perfil do grupo>" &&
+  ! printf '%s\n' "$saida" | grep -q "AWS_PROFILE=eda"; then
+  passa "credencial invalida: rc=$rc e mensagem com o perfil do grupo"
+else
+  falha "credencial invalida: rc=$rc, mensagem: $(printf '%s' "$saida" | head -n 1)"
+fi
+
+# 6. Sem AWS CLI no PATH, a mensagem diz o que falta (pula se houver aws em /usr/bin ou /bin)
+if [ -x /usr/bin/aws ] || [ -x /bin/aws ]; then
+  passa "teste de aws ausente pulado (aws instalado em /usr/bin ou /bin)"
+else
+  mkdir -p "$TMP/so_terraform" && cp "$TMP/bin/terraform" "$TMP/so_terraform/"
+  saida=$(PATH="$TMP/so_terraform:/usr/bin:/bin" bash "$RAIZ/verificacao/verifica.sh" 2>&1)
+  rc=$?
+  if [ "$rc" -ne 0 ] && printf '%s\n' "$saida" | grep -q "comando 'aws' nao encontrado"; then
+    passa "sem aws no PATH: rc=$rc e mensagem dizendo o que falta"
+  else
+    falha "sem aws no PATH: rc=$rc, mensagem: $(printf '%s' "$saida" | head -n 1)"
+  fi
 fi
 
 echo
