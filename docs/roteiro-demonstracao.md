@@ -2,7 +2,7 @@
 
 Roteiro curto para executar o projeto à mão no terminal, ver as saídas e capturar os prints dos
 slides (`docs/apresentacao.md`). Ele cobre o mesmo ciclo do README (deploy do zero, consulta com
-custo, verificação e destroy), com as capturas mais úteis marcadas de P1 a P7.
+custo, verificação e destroy), com as capturas mais úteis marcadas de P0 a P7.
 
 **Saídas esperadas.** As saídas mostradas aqui são **resultados efetivamente observados** na
 execução oficial de 03/10/2026 (`evidencias/ciclo-completo/`), exceto quando marcadas como
@@ -82,6 +82,7 @@ bash verificacao/verifica.sh --pos-destroy
   == RESUMO: 1 de 1 criterios PASSA
   ```
 - **Comprova:** o deploy parte do zero (guia, seção 06: conta limpa).
+- **Print P0 (slide 3).** Capture as linhas `PASSA` e o `RESUMO: 1 de 1`.
 
 ## Passo 3: backend remoto (bootstrap)
 
@@ -94,7 +95,7 @@ terraform -chdir=parte-1/bootstrap apply
 - **Esperado:** `Apply complete! Resources: 5 added, 0 changed, 0 destroyed.` e os outputs
   `bucket_state = "eda262-g02-tfstate"` e `tabela_trava = "eda262-g02-tflock"`.
 - **Comprova:** o backend remoto (S3 + DynamoDB) foi criado do zero, sem passo manual.
-- **Print P1 (opcional, slide 3).** Capture as últimas linhas, com `Apply complete` e os outputs.
+- **Print P1 (slide 3).** Capture as últimas linhas, com `Apply complete` e os outputs.
 
 ## Passo 4: raiz com backend remoto e workspace
 
@@ -109,7 +110,7 @@ terraform -chdir=parte-1 workspace select -or-create av1
   - no workspace: `Created and switched to workspace "av1"!`.
 - **Comprova:** módulo, backend remoto S3 + DynamoDB e workspace (guia 4.1).
 
-**Variação para a defesa (opcional, print P3, slide 7).** Mostra o bloqueio do workspace `default`.
+**Variação opcional (print P3, slide 2 ou defesa).** Mostra o bloqueio do workspace `default`.
 Rode **antes** do `workspace select`, logo depois do `init`:
 
 ```bash
@@ -170,7 +171,7 @@ bash parte-1/consulta/consulta.sh
 - **Comprova:** a pergunta respondida no Athena, com custo por consulta medido (guia 4.1).
 - **Altera:** grava `evidencias/manual/consulta-execucao.txt` e `consulta-resultado.csv`
   (fora do git), substituindo os de uma execução manual anterior.
-- **Print P4 (slide 5).** Capture do `estado=SUCCEEDED` até as primeiras UFs do resultado. É o
+- **Print P4 (slide 4).** Capture do `estado=SUCCEEDED` até as primeiras UFs do resultado. É o
   print mais importante da apresentação.
 
 ## Passo 7: verificação de aceite
@@ -190,7 +191,7 @@ bash verificacao/verifica.sh
 - **Comprova:** todos os requisitos técnicos, na própria conta (`verifica.sh` do guia, seção 06).
 - **Print P5 (slide 5).** Capture o final, com os critérios 4 a 7 e o `RESUMO: 7 de 7`.
 
-## Passo 7b (opcional): prints do console AWS (print P7, slides 3 e 6)
+## Passo 7b (opcional): prints do console AWS (print P7, slides 2 e 4)
 
 Com a stack ainda aplicada, no console da AWS (região **N. Virginia, us-east-1**):
 
@@ -219,25 +220,27 @@ bash verificacao/verifica.sh --pos-destroy
   - `== RESUMO: 1 de 1 criterios PASSA`, com 0 buckets, 0 databases, 0 workgroups e 0 tabelas do
     grupo
 - **Comprova:** destroy limpo, sem recurso órfão (guia 4.1 e 06).
-- **Print P6 (slide 8).** Capture as duas linhas `Destroy complete` e o resumo do pós-destroy.
+- **Print P6 (slide 6).** Capture as duas linhas `Destroy complete` e o resumo do pós-destroy.
   Uma montagem de dois prints funciona bem.
 
 ---
 
 ## Resumo dos prints
 
-| Print | Passo | O que mostra | Slide |
-| --- | --- | --- | --- |
-| P1 (opcional) | 3 | backend criado: `5 added` | 3 |
-| **P2** | 5 | Data Lake criado: `13 added` e outputs | 3 |
-| P3 (opcional) | 4, variação | workspace `default` bloqueado | 7 ou defesa |
-| **P4** | 6 | consulta `SUCCEEDED`, bytes e custo, primeiras UFs | 5 |
-| **P5** | 7 | `7 de 7 criterios PASSA` | 5 |
-| **P6** | 8 | `13 destroyed`, `5 destroyed`, pós-destroy limpo | 8 |
-| P7 (opcional) | 7b | console: buckets, tabela Glue, resultado no Athena | 3 e 6 |
+| Print | Passo | O que mostra | Slide | Item do guia (seção 7) |
+| --- | --- | --- | --- | --- |
+| **P0** | 2 | conta sem recursos do grupo | 3 | 3. apply do zero |
+| **P1** | 3 | backend criado: `5 added` | 3 | 3. apply do zero |
+| **P2** | 5 | Data Lake criado: `13 added` e outputs | 3 | 3. apply do zero |
+| P3 (opcional) | 4, variação | workspace `default` bloqueado | 2 ou defesa | 2. arquitetura |
+| **P4** | 6 | consulta `SUCCEEDED`, bytes e custo, primeiras UFs | 4 | 3. consulta respondida |
+| **P5** | 7 | `7 de 7 criterios PASSA` | 5 | 3. custo medido e aceite |
+| **P6** | 8 | `13 destroyed`, `5 destroyed`, pós-destroy limpo | 6 | 3. destroy |
+| P7 (opcional) | 7b | console: buckets, tabela Glue, resultado no Athena | 2 e 4 | 2 e 3 |
 
 Se não houver tempo de executar ao vivo, use a evidência gravada: os mesmos resultados estão em
-`evidencias/ciclo-completo/` (P2 = `08-apply.txt`, P4 = `10-consulta.txt`, P5 =
+`evidencias/ciclo-completo/` (P0 = `01-pre-verificacao.txt`, P1 = `04-bootstrap-apply.txt`, P2 =
+`08-apply.txt`, P3 = `06-workspace-default-bloqueado.txt`, P4 = `10-consulta.txt`, P5 =
 `11-verificacao.txt`, P6 = `12-destroy.txt`, `13-bootstrap-destroy.txt` e `14-pos-destroy.txt`). O
 guia aceita "apply do zero ou evidência gravada" (seção 7).
 
