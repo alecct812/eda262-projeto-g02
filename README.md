@@ -16,6 +16,16 @@ A resposta (27 UFs) traz pedidos elegíveis, pedidos atrasados, taxa de atraso e
 de atraso, ordenada por quantidade de atrasados e depois pela taxa. Dados: pedidos e clientes
 do dataset público da Olist (ver [Dados e licença](#dados-e-licença)).
 
+## Onde está cada coisa
+
+| Para | Leia |
+| --- | --- |
+| Executar do zero e destruir | este README, seções [Passo a passo](#passo-a-passo-do-apply-do-zero) e [Destroy](#destroy) |
+| Entender as decisões de engenharia e os números que as sustentam | [DECISOES.md](DECISOES.md) |
+| Ver a execução registrada (apply, consulta com custo, verificação, destroy) | [evidencias/README.md](evidencias/README.md) |
+| Roteiro da apresentação (5 minutos) | [docs/apresentacao.md](docs/apresentacao.md) |
+| Demonstrar no terminal e capturar prints | [docs/roteiro-demonstracao.md](docs/roteiro-demonstracao.md) |
+
 ## Arquitetura
 
 ```
@@ -37,7 +47,7 @@ S3 eda262-g02-lake-raw                          S3 eda262-g02-lake-trusted
 | Bucket bruto | `eda262-g02-lake-raw` (CSVs originais) | módulo `lake` |
 | Bucket trusted | `eda262-g02-lake-trusted` (`pedidos_entrega/pedidos_entrega.csv`) | módulo `lake` |
 | Bucket de resultados | `eda262-g02-athena-results` | módulo `lake` |
-| Glue database | `eda262_g02_entregas_ecommerce` (underscore no lugar do hífen do prefixo, porque nomes com hífen exigem aspas no SQL do Athena) | módulo `lake` |
+| Glue database | `eda262_g02_entregas_ecommerce` (underscore no lugar do hífen do prefixo, como nos labs da disciplina; no SQL do Athena, um nome com hífen precisaria de aspas) | módulo `lake` |
 | Glue table | `pedidos_entrega` (10 colunas, LazySimpleSerDe) | módulo `lake` |
 | Athena workgroup | `eda262-g02-wg` (configuração imposta, teto de 50 MiB por consulta) | módulo `lake` |
 | Consulta salva | `eda262-g02-pergunta-atrasos-uf` | módulo `lake` |
@@ -163,8 +173,8 @@ com sua saída, horários e código de saída em `evidencias/execucao-<carimbo>/
 
 O ID da conta é substituído por `<ACCOUNT_ID>`. Se uma etapa falhar depois que algo foi criado,
 o script destrói a raiz e o backend, confere com o `--pos-destroy` e só então sai com erro.
-Assim, mesmo uma execução com falha não deixa recurso órfão. O resumo da execução entregue está
-em [evidencias/README.md](evidencias/README.md).
+Assim, mesmo uma execução com falha não deixa recurso órfão. A execução oficial está em
+`evidencias/ciclo-completo/`, e o resumo, em [evidencias/README.md](evidencias/README.md).
 
 Os scripts bash têm testes que usam `aws` e `terraform` falsos, sem tocar a AWS:
 `bash parte-1/scripts/test_scripts.sh`.
@@ -176,6 +186,7 @@ nos testes teve conexões lentas com o S3.
 
 ```
 README.md, DECISOES.md
+docs/                   roteiro da apresentação e roteiro de demonstração
 parte-1/
   bootstrap/            backend remoto (state local)
   *.tf                  raiz: backend, provider, workspace, chamada do módulo
@@ -186,7 +197,7 @@ parte-1/
   consulta/             pergunta.sql e consulta.sh
   scripts/              comum.sh, ciclo_completo.sh e test_scripts.sh
 verificacao/verifica.sh
-evidencias/             execuções registradas (ciclo completo e revisão de primeira utilização)
+evidencias/             ciclo-completo/ (execução oficial) e verificacoes-complementares/
 exploracao/             análise exploratória e análise complementar da revisão (ferramentas auxiliares)
 ```
 
@@ -225,5 +236,6 @@ exatamente o `exploracao/saida/perfil_olist.json` versionado. A análise complem
   as taxas sobem, mas o ranking por quantidade não muda (`exploracao/saida/analise_revisao.json`).
 - UFs com poucos pedidos têm taxa instável: RR tem 40 pedidos e intervalo de 95% de 5,5% a 26,1%.
 - O custo é calculado a partir dos bytes medidos, não lido da fatura.
-- Tabela Glue e consulta salva do Athena não aceitam tags.
+- Tabela Glue e consulta salva do Athena não aceitam tags (documentação da AWS: o Glue não lista
+  tabelas entre os recursos taggeáveis; o Athena diz "You cannot tag queries").
 - Fora do escopo da Parte 1, conforme o guia: Parquet, particionamento, camadas e idempotência.

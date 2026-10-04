@@ -1,4 +1,0 @@
-$ bash -c source parte-1/scripts/comum.sh; aws s3api head-object --bucket eda262-g02-tfstate --key eda262-g02/av1/parte-1/terraform.tfstate --query "[ContentLength, LastModified]" --output text
-# inicio (UTC): 2026-10-02T00:18:43Z
-28946	2026-10-02T00:19:14+00:00
-# fim (UTC): 2026-10-02T00:18:45Z | codigo de saida: 0

@@ -1,0 +1,15 @@
+$ terraform -chdir=parte-1 workspace select -or-create av1
+# inicio (UTC): 2026-10-03T01:01:45Z
+╷
+│ Warning: Deprecated Parameter
+│ 
+│ The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+│ instead.
+╵
+
+Created and switched to workspace "av1"!
+
+You're now on a new, empty workspace. Workspaces isolate their state,
+so if you run "terraform plan" Terraform will not see any existing state
+for this configuration.
+# fim (UTC): 2026-10-03T01:01:50Z | codigo de saida: 0

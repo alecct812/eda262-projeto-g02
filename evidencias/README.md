@@ -1,84 +1,99 @@
-# Evidências da execução registrada
+# Evidências
 
-Execução: `evidencias/execucao-20261002T001732Z/`, gerada em 02/10/2026 (UTC) por
-`AWS_PROFILE=<perfil do grupo> bash parte-1/scripts/ciclo_completo.sh`, a partir de um **clone
-limpo** do repositório (só arquivos versionados) e numa conta sem nenhum recurso `eda262-g02`.
-Cada arquivo traz o comando executado, o horário de início e de fim (UTC, relógio da máquina
-local), a saída completa e o código de saída. O ID da conta AWS foi substituído por `<ACCOUNT_ID>`.
+Esta pasta guarda a prova de que o projeto funciona na AWS: o deploy do zero, a pergunta respondida
+no Athena com o custo medido e o destroy sem recursos órfãos (guia, seções 4.1 e 06).
 
-Ambiente: Terraform v1.15.8, provider aws 5.100.0, aws-cli 2.34.54, Git Bash (MINGW64) no
-Windows 11, região us-east-1. Duração total: 3 min 29 s (00:17:32 a 00:21:01 UTC).
+## O que são as evidências
 
-| # | Etapa | Comando | Resultado | Arquivo |
-| --- | --- | --- | --- | --- |
-| 01 | Pré-verificação (conta limpa) | `bash verificacao/verifica.sh --pos-destroy` | 0 buckets, 0 Glue databases, 0 workgroups e 0 tabelas DynamoDB do grupo; 1 de 1 critérios PASSA | `01-pre-verificacao.txt` |
-| 02 | Versões | `terraform version; aws --version; uname -s` | Terraform v1.15.8, aws-cli 2.34.54, MINGW64 | `02-versoes.txt` |
-| 03 | Init do backend | `terraform -chdir=parte-1/bootstrap init` | provider aws 5.100.0 instalado conforme o lock | `03-bootstrap-init.txt` |
-| 04 | Apply do backend | `terraform -chdir=parte-1/bootstrap apply -auto-approve` | Apply complete! Resources: 5 added | `04-bootstrap-apply.txt` |
-| 05 | Init da raiz | `terraform -chdir=parte-1 init -reconfigure` | Successfully configured the backend "s3" (com aviso esperado de depreciação do `dynamodb_table`) | `05-init.txt` |
-| 06 | Bloqueio do workspace default | `terraform -chdir=parte-1 plan` no workspace `default` | Error: Resource precondition failed; código de saída 1, como esperado | `06-workspace-default-bloqueado.txt` |
-| 07 | Workspace | `terraform -chdir=parte-1 workspace select -or-create av1` | Created and switched to workspace "av1" | `07-workspace.txt` |
-| 08 | Apply do Data Lake | `terraform -chdir=parte-1 apply -auto-approve` | Apply complete! Resources: 13 added (3 buckets, 3 bloqueios públicos, 3 objetos, Glue database e tabela, workgroup, consulta salva) | `08-apply.txt` |
-| 09 | State remoto | `aws s3api head-object` em `eda262-g02/av1/parte-1/terraform.tfstate` | 28.946 bytes no bucket `eda262-g02-tfstate` | `09-state-remoto.txt` |
-| 10 | Pergunta no Athena | `bash parte-1/consulta/consulta.sh` | SUCCEEDED, 11.167.989 bytes varridos, custo calculado US$ 0,00006, 27 UFs | `10-consulta.txt`, `consulta-execucao.txt`, `consulta-resultado.csv` |
-| 11 | Verificação de aceite | `bash verificacao/verifica.sh` | 7 de 7 critérios PASSA (inclui grão 99.441 = 99.441 e 96.470 nulos em `motivo_exclusao`) | `11-verificacao.txt` |
-| 12 | Destroy do Data Lake | `terraform -chdir=parte-1 destroy -auto-approve` | Destroy complete! Resources: 13 destroyed | `12-destroy.txt` |
-| 13 | Destroy do backend | `terraform -chdir=parte-1/bootstrap destroy -auto-approve` | Destroy complete! Resources: 5 destroyed | `13-bootstrap-destroy.txt` |
-| 14 | Pós-destroy (sem órfãos) | `bash verificacao/verifica.sh --pos-destroy` | 0 recursos do grupo restantes; 1 de 1 critérios PASSA | `14-pos-destroy.txt` |
+São arquivos de texto de três tipos:
 
-## Consulta e custo
+1. **Registros de execução** (`NN-etapa.txt`). Cada um traz:
+   - o comando exato (linha que começa com `$`);
+   - o horário de início e de fim, em UTC, pelo relógio da máquina;
+   - a saída completa do comando, incluindo erros;
+   - o código de saída (0 significa sucesso).
 
-Arquivo `consulta-execucao.txt`:
+   O ID da conta AWS é substituído por `<ACCOUNT_ID>` e os códigos de cor do terminal são removidos
+   (função `redige` em `parte-1/scripts/comum.sh`).
+2. **Artefatos de dados**, que não são saída de terminal:
+   - `consulta-execucao.txt`: metadados da consulta lidos da API do Athena (ID da execução, estado,
+     bytes varridos, tempo de motor, preço e custo calculado);
+   - `consulta-resultado.csv`: o arquivo de resultado que o próprio Athena gravou no bucket de
+     resultados.
+3. **Índices** (`README.md`): resumos escritos a partir dos arquivos acima.
+
+## `ciclo-completo/`: a execução oficial
+
+Gerada por `bash parte-1/scripts/ciclo_completo.sh` em 03/10/2026, entre 01:00:10 e 01:05:13 UTC
+(5 min 03 s). A execução partiu de um **clone limpo** do commit `03f412a`, numa conta sem nenhum
+recurso `eda262-g02`. Nenhum arquivo de código ou de dados mudou depois desse commit, então a
+execução corresponde exatamente ao que está publicado.
+
+Ambiente: Terraform v1.15.8, provider aws 5.100.0, aws-cli 2.34.54, Git Bash no Windows 11, região
+us-east-1.
+
+| # | Etapa | Resultado | O que comprova |
+| --- | --- | --- | --- |
+| 01 | `verifica.sh --pos-destroy` | 0 recursos do grupo na conta | conta limpa antes do deploy |
+| 02 | versões | Terraform v1.15.8, aws-cli 2.34.54 | ambiente usado |
+| 03 | `terraform -chdir=parte-1/bootstrap init` | provider 5.100.0, conforme o lock | dependências fixadas |
+| 04 | `terraform -chdir=parte-1/bootstrap apply` | `Apply complete! Resources: 5 added` | backend remoto (S3 + DynamoDB) criado do zero |
+| 05 | `terraform -chdir=parte-1 init` | `Successfully configured the backend "s3"` | raiz usando o backend remoto |
+| 06 | `plan` no workspace `default` | `Error: Resource precondition failed`, código 1 | o `default` é bloqueado |
+| 07 | `workspace select -or-create av1` | `Created and switched to workspace "av1"` | workspace nomeado |
+| 08 | `terraform -chdir=parte-1 apply` | `Apply complete! Resources: 13 added`, com o plano completo | buckets, carga dos dados, Glue com schema declarado, workgroup |
+| 09 | `aws s3api head-object` no state | 28.946 bytes em `eda262-g02/av1/parte-1/terraform.tfstate` | state remoto gravado |
+| 10 | `bash parte-1/consulta/consulta.sh` | SUCCEEDED, 11.167.989 bytes, US$ 0,00006, 27 UFs | pergunta respondida com custo medido |
+| 11 | `bash verificacao/verifica.sh` | `7 de 7 criterios PASSA` | todos os critérios de aceite |
+| 12 | `terraform -chdir=parte-1 destroy` | `Destroy complete! Resources: 13 destroyed` | destroy do Data Lake |
+| 13 | `terraform -chdir=parte-1/bootstrap destroy` | `Destroy complete! Resources: 5 destroyed` | destroy do backend |
+| 14 | `verifica.sh --pos-destroy` | 0 recursos do grupo restantes | nenhum recurso órfão |
+
+### Consulta e custo
+
+Fonte: `ciclo-completo/consulta-execucao.txt`.
 
 | Campo | Valor |
 | --- | --- |
-| ID da execução | `dec4ad26-b1c2-4bd7-831c-614dce443259` |
+| ID da execução | `1428c728-1f33-4728-a01b-e0560caa68c2` |
 | Estado | SUCCEEDED |
 | Bytes varridos (`DataScannedInBytes`) | 11.167.989 |
-| Tempo de motor | 945 ms |
-| Preço | US$ 5,00 por TB (us-east-1), mínimo de 10 MB por consulta |
+| Tempo de motor | 1.031 ms |
 | Custo calculado | 12 MB x US$ 5,00 / TB = **US$ 0,00006** |
 
 A verificação (etapa 11) executou a pergunta de novo (execução
-`81a52669-6f54-47c5-bfd9-3ad910424826`, também 11.167.989 bytes) e conferiu 27 UFs com 96.203
-pedidos elegíveis e 6.531 atrasados, os mesmos totais do cálculo local do preparo
-(`parte-1/dados/trusted/manifesto.json`).
+`faebe614-633d-46ae-b5cc-cf6cb20be893`). Ela conferiu 27 UFs, com 96.203 pedidos elegíveis e 6.531
+atrasados, os mesmos totais do cálculo local em `parte-1/dados/trusted/manifesto.json`.
 
-## Resposta da pergunta
+### Resposta da pergunta (`ciclo-completo/consulta-resultado.csv`)
 
-Em quais estados de destino a promessa de prazo foi mais descumprida entre jan/2017 e ago/2018?
-Ordenado por pedidos atrasados e depois pela taxa (arquivo `consulta-resultado.csv`):
+As cinco UFs com mais pedidos atrasados entre jan/2017 e ago/2018:
 
-| # | UF | Pedidos elegíveis | Pedidos atrasados | Taxa de atraso (%) | Média de dias de atraso |
-| ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | SP | 40399 | 1817 | 4,5 | 8,3 |
-| 2 | RJ | 12310 | 1495 | 12,14 | 13,5 |
-| 3 | MG | 11319 | 519 | 4,59 | 8,4 |
-| 4 | BA | 3253 | 396 | 12,17 | 12,0 |
-| 5 | RS | 5327 | 325 | 6,1 | 10,2 |
-| 6 | SC | 3537 | 291 | 8,23 | 8,3 |
-| 7 | ES | 1992 | 214 | 10,74 | 11,3 |
-| 8 | PR | 4903 | 199 | 4,06 | 8,3 |
-| 9 | CE | 1273 | 176 | 13,83 | 15,2 |
-| 10 | PE | 1587 | 153 | 9,64 | 12,0 |
-| 11 | GO | 1950 | 128 | 6,56 | 11,4 |
-| 12 | MA | 713 | 125 | 17,53 | 10,5 |
-| 13 | DF | 2074 | 118 | 5,69 | 7,4 |
-| 14 | PA | 942 | 106 | 11,25 | 12,8 |
-| 15 | AL | 396 | 85 | 21,46 | 9,5 |
-| 16 | MS | 701 | 68 | 9,7 | 8,3 |
-| 17 | PI | 475 | 66 | 13,89 | 13,3 |
-| 18 | PB | 516 | 54 | 10,47 | 10,3 |
-| 19 | MT | 885 | 53 | 5,99 | 10,6 |
-| 20 | SE | 332 | 51 | 15,36 | 16,2 |
-| 21 | RN | 470 | 44 | 9,36 | 14,5 |
-| 22 | TO | 274 | 27 | 9,85 | 6,5 |
-| 23 | RO | 243 | 7 | 2,88 | 5,6 |
-| 24 | RR | 40 | 5 | 12,5 | 36,4 |
-| 25 | AM | 145 | 4 | 2,76 | 30,3 |
-| 26 | AC | 80 | 3 | 3,75 | 18,7 |
-| 27 | AP | 67 | 2 | 2,99 | 72,5 |
+| UF | Pedidos elegíveis | Pedidos atrasados | Taxa de atraso |
+| --- | ---: | ---: | ---: |
+| SP | 40.399 | 1.817 | 4,50% |
+| RJ | 12.310 | 1.495 | 12,14% |
+| MG | 11.319 | 519 | 4,59% |
+| BA | 3.253 | 396 | 12,17% |
+| RS | 5.327 | 325 | 6,10% |
 
-Leitura: SP tem o maior número de pedidos atrasados (1.817), mas com taxa baixa (4,5%). RJ junta
-volume e taxa altos (1.495 pedidos, 12,14%) e é a prioridade mais clara de investigação. AL tem
-a maior taxa (21,46%), porém sobre só 396 pedidos.
+A maior taxa é a de AL (21,46%, com 85 atrasados em 396 pedidos). A tabela completa, com as 27
+UFs, está no CSV.
+
+## `verificacoes-complementares/`: checagens independentes
+
+Sete checagens feitas em 03/10/2026 com a stack aplicada, durante a revisão de primeira utilização.
+Elas comprovam pontos que o `verifica.sh` não cobre e que o `DECISOES.md` cita. O índice está em
+`verificacoes-complementares/README.md`.
+
+## Execuções novas e material fora do repositório
+
+Uma nova execução de `ciclo_completo.sh` cria `evidencias/execucao-<carimbo>/` ao lado destas.
+Execuções manuais de `consulta.sh` gravam em `evidencias/manual/`, que fica fora do git.
+
+Os registros de execuções anteriores, todas com o mesmo resultado, não estão publicados. Eles
+continuam no histórico do git (commits `7777c3c` e `03f412a`):
+
+- o ciclo completo de 02/10;
+- a revisão completa de 03/10 (35 etapas, incluindo o passo a passo do README feito à mão e
+  checagens que falharam por erro do próprio script de checagem e foram refeitas).

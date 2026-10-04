@@ -1,7 +1,0 @@
-# objetivo: Qualidade do IaC: formatacao canonica de todos os .tf
-# diretorio: eda262-g02-revisao
-# comando: terraform fmt -check -recursive -diff parte-1 && echo "fmt: nenhum arquivo fora do padrao"
-# inicio (UTC): 2026-10-03T00:41:37Z
-# ---- saida ----
-fmt: nenhum arquivo fora do padrao
-# ---- fim (UTC): 2026-10-03T00:41:38Z | codigo de saida: 0

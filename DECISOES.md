@@ -5,7 +5,8 @@ dados: Olist, CC BY-NC-SA 4.0 · pergunta: atrasos de entrega por UF de destino,
 
 Cada decisão diz o que escolhemos, o que aceitamos perder, por que não as alternativas e o
 número que a sustenta. Fontes dos números: `parte-1/dados/trusted/manifesto.json` (preparo),
-`exploracao/saida/perfil_olist.json` (análise exploratória) e `evidencias/` (execução na AWS).
+`exploracao/saida/perfil_olist.json` (análise exploratória), `exploracao/saida/analise_revisao.json`
+(análise complementar) e `evidencias/` (execução na AWS; índice em `evidencias/README.md`).
 
 ## DECISÃO 01: Grão da trusted é um pedido
 
@@ -48,7 +49,7 @@ dentro do dia, que a origem não tem para a previsão.
 > virariam falsos atrasos, inflando a taxa em 1,34 ponto percentual. Recontado no próprio Athena
 > sobre a trusted: 96.470 elegíveis, 6.534 pela coluna `atrasado` e também pela regra por dia, e
 > 7.826 comparando horários
-> (`evidencias/revisao-primeira-utilizacao-20261003T003851Z/29-sonda-regra-atraso-athena-corrigida.txt`).
+> (`evidencias/verificacoes-complementares/regra-de-atraso-no-athena.txt`).
 
 ## DECISÃO 04: Limpeza da camada bruta para a trusted e elegibilidade
 
@@ -66,7 +67,7 @@ denominador: a taxa mede atraso de entrega, não falha de atendimento.
 > coleta, 14 entregues sem aprovação, 2 entregues sem coleta e 6 cancelados com data de entrega.
 > Duplicatas: 0 (nenhuma deduplicação inventada). No Athena,
 > `count_if(motivo_exclusao IS NULL) = 96470`, confirmando que o campo vazio vira nulo (critério
-> 4 do `verifica.sh` em `evidencias/execucao-20261002T001732Z/11-verificacao.txt`). Custo
+> 4 do `verifica.sh` em `evidencias/ciclo-completo/11-verificacao.txt`). Custo
 > medido da exclusão: no período da pergunta, 1.699 pedidos com logística em aberto (1.097
 > `shipped`, 299 `processing`, 296 `invoiced`, 5 `created` e 2 `approved`) ficaram com o prazo
 > vencido até 17/10/2018 sem entrega. Contá-los como promessas descumpridas elevaria a taxa de SP
@@ -128,11 +129,13 @@ perder** consultas legítimas que precisem ler mais de 4,69 varreduras completas
 pergunta desta parte não exige.
 
 > **Medido:** na execução registrada, pergunta com estado `SUCCEEDED`, 11.167.989 bytes
-> varridos, 945 ms de motor e custo calculado de US$ 0,0000600000 (12 MB cobrados; execução
-> `dec4ad26-b1c2-4bd7-831c-614dce443259`, em
-> `evidencias/execucao-20261002T001732Z/consulta-execucao.txt`). A mesma consulta varreu os
-> mesmos 11.167.989 bytes na verificação (execução `81a52669-6f54-47c5-bfd9-3ad910424826`) e em
-> desenvolvimento (execução `145bae2d-8639-454c-b711-e1a550bd64c1`). O teto de 52.428.800 bytes
+> varridos, 1.031 ms de motor e custo calculado de US$ 0,0000600000 (12 MB cobrados; execução
+> `1428c728-1f33-4728-a01b-e0560caa68c2`, em
+> `evidencias/ciclo-completo/consulta-execucao.txt`). A mesma consulta varreu os
+> mesmos 11.167.989 bytes na verificação (execução `faebe614-633d-46ae-b5cc-cf6cb20be893`), na
+> execução anterior (`dec4ad26-b1c2-4bd7-831c-614dce443259`), na revisão de primeira utilização
+> (`c7794fa6-dfec-45ce-8096-f3c9ee20fa6a`) e em desenvolvimento
+> (`145bae2d-8639-454c-b711-e1a550bd64c1`); os registros dessas três estão no histórico do git. O teto de 52.428.800 bytes
 > vale 4,69 vezes a varredura completa: a pergunta usa 21% dele, e só leituras acima de 4,69
 > varreduras são canceladas.
 
@@ -146,7 +149,7 @@ fora do state. **Aceitamos perder** repositório leve: os dados ficam versionado
 
 > **Medido:** 3 objetos, com 17.654.914 + 9.033.957 + 11.167.989 = 37.856.860 bytes. O
 > `terraform apply` da raiz cria 13 recursos, incluindo os 3 objetos, e o `destroy` remove os 13
-> (`evidencias/execucao-20261002T001732Z/08-apply.txt` e `12-destroy.txt`). O pós-destroy
+> (`evidencias/ciclo-completo/08-apply.txt` e `12-destroy.txt`). O pós-destroy
 > encontra 0 buckets do grupo (`14-pos-destroy.txt`). Após o apply, `plan -detailed-exitcode`
 > devolve 0 (nada a reenviar; critério 2 em `11-verificacao.txt`).
 
@@ -160,9 +163,9 @@ aplicado por vez. **Aceitamos** o aviso de depreciação do `dynamodb_table` no 
 porque o guia exige DynamoDB, e a ordem obrigatória do destroy: primeiro a raiz, depois o
 bootstrap.
 
-> **Medido** (`evidencias/execucao-20261002T001732Z/`): bootstrap com 5 recursos
+> **Medido** (`evidencias/ciclo-completo/`): bootstrap com 5 recursos
 > (`04-bootstrap-apply.txt`) e raiz com 13 (`08-apply.txt`); ciclo completo do zero ao
-> pós-destroy em 3 min 29 s. State em
+> pós-destroy em 5 min 03 s (3 min 29 s na execução anterior; a duração varia com a rede). State em
 > `s3://eda262-g02-tfstate/eda262-g02/av1/parte-1/terraform.tfstate` com 28.946 bytes após o
 > apply (`09-state-remoto.txt`). `plan` no workspace `default` termina com
 > `Error: Resource precondition failed` e código 1 (`06-workspace-default-bloqueado.txt`); no
@@ -173,8 +176,14 @@ bootstrap.
 As tags `turma=eda262`, `grupo=g02` e `projeto=engenharia-de-dados` são aplicadas por
 `default_tags` no provider (mais `workspace=av1` na raiz). Dois tipos de recurso não aceitam tags
 na API da AWS e ficam sem elas: a tabela do Glue (`aws_glue_catalog_table`) e a consulta salva do
-Athena (`aws_athena_named_query`). Os dois são removidos pelo destroy junto com o database e o
-workgroup.
+Athena (`aws_athena_named_query`): a documentação do Glue não lista tabelas entre os recursos
+taggeáveis, e a do Athena diz "You cannot tag queries". Os dois são removidos pelo destroy junto com
+o database e o workgroup, que levam as tags.
+
+O database do Glue é o único nome sem o hífen do prefixo: `eda262_g02_entregas_ecommerce`. Seguimos
+a convenção dos labs da disciplina, que usam hífen nos buckets e workgroups e underscore nos
+databases do Glue (`eda_a04_raw_...`, `eda_a08_lake_...`; o lab03 pede nomes "sem hífen, por causa
+do Glue"). No SQL do Athena, um nome com hífen precisaria de aspas sempre que citado.
 
 > **Medido:** o critério 6 do `verifica.sh` confere as três tags em 8 recursos: os 4 buckets, o
 > workgroup, o Glue database, a tabela de trava e o objeto trusted.

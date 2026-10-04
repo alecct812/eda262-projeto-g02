@@ -1,0 +1,25 @@
+# objetivo: Reprodutibilidade dos numeros da EDA citados no DECISOES.md: rodar a EDA numa copia isolada com o dataset original do Kaggle e comparar com o perfil versionado
+# diretorio: eda262-g02-revisao
+# comando: P=<raiz-do-projeto>; T=<pasta-temporaria>; rm -rf $T; mkdir -p $T/exploracao $T/dataset/archive; cp $P/dataset/archive/*.csv $T/dataset/archive/; cp exploracao/eda_olist.py $T/exploracao/; (cd $T && python exploracao/eda_olist.py); python - $T/exploracao/saida/perfil_olist.json exploracao/saida/perfil_olist.json <<PY
+import json, sys
+a = json.load(open(sys.argv[1], encoding="utf-8")); b = json.load(open(sys.argv[2], encoding="utf-8"))
+print("perfil regenerado identico ao versionado (conteudo JSON):", a == b)
+dif = [k for k in set(a) | set(b) if a.get(k) != b.get(k)]
+print("chaves diferentes:", dif)
+PY
+rm -rf $T
+# inicio (UTC): 2026-10-03T00:42:03Z
+# ---- saida ----
+[ok] customers: 99441 registros
+[ok] geolocation: 1000163 registros
+[ok] order_items: 112650 registros
+[ok] order_payments: 103886 registros
+[ok] order_reviews: 99224 registros
+[ok] orders: 99441 registros
+[ok] products: 32951 registros
+[ok] sellers: 3095 registros
+[ok] category_translation: 71 registros
+[ok] perfil gravado em exploracao\saida\perfil_olist.json
+perfil regenerado identico ao versionado (conteudo JSON): True
+chaves diferentes: []
+# ---- fim (UTC): 2026-10-03T00:42:55Z | codigo de saida: 0
